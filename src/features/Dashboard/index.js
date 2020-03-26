@@ -28,7 +28,7 @@ const Dashboard = () => {
       <h1>{`Welcome ${first}!`}</h1>
       <Logout />
       <Colonies />
-      
+
       {/* {cartToggle ? <Button
         variant="outlined"
         onClick={setClose}

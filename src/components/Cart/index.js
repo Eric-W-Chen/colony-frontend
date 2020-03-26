@@ -18,12 +18,12 @@ const Cart = () => {
           </TableHead>
           <TableBody>
             {items.map(item => (
-                <TableRow key={item.name}>
-                  <TableCell component="th" scope="row">
-                    {item.name}
-                  </TableCell>
-                  <TableCell align="right">{item.cost}</TableCell>
-                </TableRow>
+              <TableRow key={item.name}>
+                <TableCell component="th" scope="row">
+                  {item.name}
+                </TableCell>
+                <TableCell align="right">{item.cost}</TableCell>
+              </TableRow>
             ))}
           </TableBody>
         </Table>

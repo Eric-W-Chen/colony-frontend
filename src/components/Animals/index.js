@@ -9,7 +9,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
 
-
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
@@ -26,21 +25,23 @@ const useStyles1 = makeStyles(theme => ({
 function TablePaginationActions(props) {
   const classes = useStyles1();
   const theme = useTheme();
-  const { count, page, rowsPerPage, onChangePage } = props;
+  const {
+    count, page, rowsPerPage, onChangePage,
+  } = props;
 
-  const handleFirstPageButtonClick = event => {
+  const handleFirstPageButtonClick = (event) => {
     onChangePage(event, 0);
   };
 
-  const handleBackButtonClick = event => {
+  const handleBackButtonClick = (event) => {
     onChangePage(event, page - 1);
   };
 
-  const handleNextButtonClick = event => {
+  const handleNextButtonClick = (event) => {
     onChangePage(event, page + 1);
   };
 
-  const handleLastPageButtonClick = event => {
+  const handleLastPageButtonClick = (event) => {
     onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
   };
 
@@ -50,26 +51,18 @@ function TablePaginationActions(props) {
         onClick={handleFirstPageButtonClick}
         disabled={page === 0}
         aria-label="first page"
-      >
-        
-      </IconButton>
-      <IconButton onClick={handleBackButtonClick} disabled={page === 0} aria-label="previous page">
-        
-      </IconButton>
+      />
+      <IconButton onClick={handleBackButtonClick} disabled={page === 0} aria-label="previous page" />
       <IconButton
         onClick={handleNextButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="next page"
-      >
-       
-      </IconButton>
+      />
       <IconButton
         onClick={handleLastPageButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="last page"
-      >
-        
-      </IconButton>
+      />
     </div>
   );
 }
@@ -91,13 +84,13 @@ const useStyles2 = makeStyles(theme => ({
   table: {
     width: '100%',
     minWidth: 500,
-    marginTop: 8
+    marginTop: 8,
   },
   paper: {
     position: 'absolute',
     width: '60%',
     padding: theme.spacing(2, 4, 3),
-    outline: 0
+    outline: 0,
   },
   root: {
     display: 'flex',
@@ -143,15 +136,15 @@ const Animals = () => {
 
   // Use the useEffect hook to get the animals using the id
   console.log('ID of the Colony', id);
-  
-  const onChangeHandler = event => {
+
+  const onChangeHandler = (event) => {
     setFile(event.target.files[0]);
     console.log(event.target.files[0].name);
     setFileName(event.target.files[0].name);
-  }
+  };
 
   const onClickHandler = async () => {
-    var reader = new FileReader();
+    const reader = new FileReader();
 
     reader.readAsText(file);
 
@@ -159,13 +152,12 @@ const Animals = () => {
       const load = reader.result;
       const data = { payload: load, name: fileName };
       await addColony(data);
-    }
+    };
 
     reader.onerror = () => {
       console.log(reader.onerror);
-    }
-
-  }
+    };
+  };
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
@@ -173,7 +165,7 @@ const Animals = () => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = event => {
+  const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
@@ -192,108 +184,117 @@ const Animals = () => {
   return (
     <Container component="main" style={{ padding: 8 }}>
       <CssBaseline />
-      <input type="file" name="file" onChange={ onChangeHandler } />      
-      <Button onClick={ onClickHandler } variant="outlined">Upload</Button>
+      <input type="file" name="file" onChange={onChangeHandler} />
+      <Button onClick={onClickHandler} variant="outlined">Upload</Button>
 
       <TableContainer className={classes.table} component={Paper}>
-      <Table className={classes.table} aria-label="custom pagination table">
-        <TableBody>
-          {(rowsPerPage > 0
+        <Table className={classes.table} aria-label="custom pagination table">
+          <TableBody>
+            {(rowsPerPage > 0
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
           ).map(row => (
             <TableRow key={row.name}>
-              <TableCell style={{ cursor: 'pointer' }} component="th" scope="row" onClick={()=> {
-                handleOpenModal(row)
-              }}>
+              <TableCell
+                style={{ cursor: 'pointer' }}
+                component="th"
+                scope="row"
+                onClick={() => {
+                handleOpenModal(row);
+              }}
+              >
                 <div style={{ fontWeight: 'bold', fontSize: 18, flexDirection: 'row' }}>
                   <Avatar alt={row.name} src={row.photo} className={classes.large} />
                   <span>{row.name}</span>
                 </div>
               </TableCell>
               <TableCell align="right">
-                <Button variant="outlined" color="primary" onClick={()=>{
-                  window.location = `/animal/animalId`
-                }}>Details</Button>
-             </TableCell>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  onClick={() => {
+                  window.location = '/animal/animalId';
+                }}
+                >Details
+                </Button>
+              </TableCell>
             </TableRow>
           ))}
 
-          {emptyRows > 0 && (
+            {emptyRows > 0 && (
             <TableRow style={{ height: 53 * emptyRows }}>
               <TableCell colSpan={6} />
             </TableRow>
           )}
-        </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TablePagination
-              rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-              colSpan={3}
-              count={rows.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              SelectProps={{
+          </TableBody>
+          <TableFooter>
+            <TableRow>
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+                colSpan={3}
+                count={rows.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                SelectProps={{
                 inputProps: { 'aria-label': 'rows per page' },
                 native: true,
               }}
-              onChangePage={handleChangePage}
-              onChangeRowsPerPage={handleChangeRowsPerPage}
-              // ActionsComponent={TablePaginationActions}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+              />
+            </TableRow>
+          </TableFooter>
+        </Table>
+      </TableContainer>
+
+
+      <Modal
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+        open={openModal}
+        onClose={handleCloseModal}
+      >
+        <div style={{ top: '20%', left: '20%' }} className={classes.paper}>
+
+          <Card className={classes.root}>
+            <CardMedia
+              className={classes.cover}
+              image={currentAnimal.photo}
+              title="Live from space album cover"
             />
-          </TableRow>
-        </TableFooter>
-      </Table>
-    </TableContainer>
+            <div className={classes.details}>
+              <CardContent className={classes.content}>
 
+                <Typography variant="subtitle1" color="textSecondary">
+                  <strong>Name:</strong> {currentAnimal.name}
+                </Typography>
+                <Typography variant="subtitle1" color="textSecondary">
+                  <strong>ID:</strong> {currentAnimal.id}
+                </Typography>
+                <Typography variant="subtitle1" color="textSecondary">
+                  <strong>Species:</strong> My Species
+                </Typography>
+                <Typography variant="subtitle1" color="textSecondary">
+                  <strong>Date of birth:</strong> mm/dd/yyyy
+                </Typography>
+                <Typography variant="subtitle1" color="textSecondary">
+                  <strong>Date of death:</strong> mm/dd/yyyy
+                </Typography>
 
-    <Modal
-      aria-labelledby="simple-modal-title"
-      aria-describedby="simple-modal-description"
-      open={openModal}
-      onClose={handleCloseModal}
-    >
-    <div style={{ top: '20%', left: '20%'}} className={classes.paper}>
-              
-      <Card className={classes.root}>
-        <CardMedia
-          className={classes.cover}
-          image={currentAnimal.photo}
-          title="Live from space album cover"
-        />
-        <div className={classes.details}>
-          <CardContent className={classes.content}>
-            
-            <Typography variant="subtitle1" color="textSecondary">
-              <strong>Name:</strong> {currentAnimal.name}
-            </Typography>
-            <Typography variant="subtitle1" color="textSecondary">
-              <strong>ID:</strong> {currentAnimal.id}
-            </Typography>
-            <Typography variant="subtitle1" color="textSecondary">
-              <strong>Species:</strong> My Species
-            </Typography>
-            <Typography variant="subtitle1" color="textSecondary">
-              <strong>Date of birth:</strong> mm/dd/yyyy
-            </Typography>
-            <Typography variant="subtitle1" color="textSecondary">
-              <strong>Date of death:</strong> mm/dd/yyyy
-            </Typography>
+                <Typography variant="subtitle1" color="textSecondary">
+                  <strong>Litter:</strong> 4
+                </Typography>
+              </CardContent>
 
-            <Typography variant="subtitle1" color="textSecondary">
-              <strong>Litter:</strong> 4
-            </Typography>
-          </CardContent>
-        
-          <div className={classes.controls}>
-            <Button variant="outlined" color="primary" onClick={handleCloseModal}>Done</Button>
-          </div>
+              <div className={classes.controls}>
+                <Button variant="outlined" color="primary" onClick={handleCloseModal}>Done</Button>
+              </div>
+            </div>
+
+          </Card>
+
         </div>
-        
-      </Card>
-
-    </div>
-  </Modal>
+      </Modal>
 
 
     </Container >

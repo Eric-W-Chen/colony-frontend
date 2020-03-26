@@ -62,7 +62,7 @@ const useProfileProvider = () => {
   const register = credentials => axios
     .post(`${BASE_URL}/user`, credentials)
     .then(({ data }) => {
-      dispatch({ type: REGISTER, payload: data })
+      dispatch({ type: REGISTER, payload: data });
     });
 
   const logout = () => dispatch({
@@ -71,8 +71,8 @@ const useProfileProvider = () => {
 
   const addColony = newColony => axios
     .post(`${BASE_URL}/colony`, newColony)
-    .then (({data}) => {
-      dispatch({ type: COLONY, payload: data})
+    .then(({ data }) => {
+      dispatch({ type: COLONY, payload: data });
     });
 
   // const addItem = credentials => axios
@@ -80,7 +80,7 @@ const useProfileProvider = () => {
   //   .then(({data}) => {
   //     dispatch({ type: ITEM, payload: data })
   //   });
-  
+
   // const getCart = () => axios
   //   .get(`${BASE_URL}/cart`)
   //   .then(({data}) => {
@@ -93,7 +93,7 @@ const useProfileProvider = () => {
     login,
     logout,
     register,
-    addColony
+    addColony,
     // addItem,
     // getCart
   };

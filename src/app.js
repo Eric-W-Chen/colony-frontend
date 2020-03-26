@@ -4,7 +4,7 @@ import { ProfileProvider, useProfileProvider } from 'contexts/profile';
 import HomePage from 'features/HomePage';
 import Dashboard from 'features/Dashboard';
 import Registration from 'features/Registration';
-import Animals from'./components/Animals';
+import Animals from './components/Animals';
 import SingleAnimal from './components/SingleAnimal';
 
 

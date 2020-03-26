@@ -12,17 +12,16 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 
 
-
 const useStyles2 = makeStyles(theme => ({
   table: {
     width: '100%',
     minWidth: 500,
-    marginTop: 8
+    marginTop: 8,
   },
   paper: {
     width: '100%',
     padding: theme.spacing(2, 4, 3),
-    outline: 0
+    outline: 0,
   },
   root: {
     display: 'flex',
@@ -65,86 +64,86 @@ const SingleAnimal = () => {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [openModal, setOpenModal] = React.useState(false);
   const [currentAnimal, setCurrentAnimal] = useState({});
-  const [notes, setNotes] = useState("");
+  const [notes, setNotes] = useState('');
 
   const onSaveNotes = (event) => {
-    alert("click works: " + notes );
-    const myNotes = { animalId: id, notes } // store the notes against an animal for a specific user.
+    alert(`click works: ${notes}`);
+    const myNotes = { animalId: id, notes }; // store the notes against an animal for a specific user.
     // saveNotes(myNotes);
-  }
+  };
 
   const onNotesAdded = (event) => {
-      console.log(event.target.value);
-      setNotes(event.target.value);
-  }
+    console.log(event.target.value);
+    setNotes(event.target.value);
+  };
 
 
   return (
     <Container component="main">
       <CssBaseline />
 
-        <div className={classes.paper}>
-                  
-          <Card className={classes.root}>
-            <CardMedia
-              className={classes.cover}
-              image="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-              title="Live from space album cover"
-            />
-            <div className={classes.details}>
-              <CardContent className={classes.content}>
-                
-                <Typography variant="subtitle1" color="textSecondary">
-                  <strong>Name:</strong> {currentAnimal.name}
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  <strong>ID:</strong> {currentAnimal.id}
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  <strong>Species:</strong> My Species
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  <strong>Date of birth:</strong> mm/dd/yyyy
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  <strong>Date of death:</strong> mm/dd/yyyy
-                </Typography>
+      <div className={classes.paper}>
 
-                <Typography variant="subtitle1" color="textSecondary">
-                  <strong>Litter:</strong> 4
-                </Typography>
-              </CardContent>
+        <Card className={classes.root}>
+          <CardMedia
+            className={classes.cover}
+            image="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+            title="Live from space album cover"
+          />
+          <div className={classes.details}>
+            <CardContent className={classes.content}>
 
-              <CardContent className={classes.content}>
-                
-                <Typography variant="subtitle1" color="textSecondary">
-                  <strong>Father ID:</strong> #
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  <strong>Mother ID:</strong> #
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  <strong>Gene 1</strong> BRCA1
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  <strong>Gene 2</strong> BRCA2
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  <strong>Gene 3</strong> Y
-                </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                <strong>Name:</strong> {currentAnimal.name}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                <strong>ID:</strong> {currentAnimal.id}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                <strong>Species:</strong> My Species
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                <strong>Date of birth:</strong> mm/dd/yyyy
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                <strong>Date of death:</strong> mm/dd/yyyy
+              </Typography>
 
-                <Typography variant="subtitle1" color="textSecondary">
-                  <strong>Litter:</strong> 4
-                </Typography>
-              </CardContent>
-            
-              <div className={classes.controls}>
-                <Button onClick={()=> history.goBack()} variant="outlined" color="primary">Back</Button>
-              </div>
+              <Typography variant="subtitle1" color="textSecondary">
+                <strong>Litter:</strong> 4
+              </Typography>
+            </CardContent>
+
+            <CardContent className={classes.content}>
+
+              <Typography variant="subtitle1" color="textSecondary">
+                <strong>Father ID:</strong> #
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                <strong>Mother ID:</strong> #
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                <strong>Gene 1</strong> BRCA1
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                <strong>Gene 2</strong> BRCA2
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                <strong>Gene 3</strong> Y
+              </Typography>
+
+              <Typography variant="subtitle1" color="textSecondary">
+                <strong>Litter:</strong> 4
+              </Typography>
+            </CardContent>
+
+            <div className={classes.controls}>
+              <Button onClick={() => history.goBack()} variant="outlined" color="primary">Back</Button>
             </div>
-            
-          </Card>
-          
+          </div>
+
+        </Card>
+
         <div className={classes.details} style={{ flexDirection: 'column' }}>
           <div>
             <TextField
@@ -163,10 +162,10 @@ const SingleAnimal = () => {
             />
           </div>
           <div className={classes.controls} style={{ paddingRight: 0 }}>
-              <Button onClick={onSaveNotes} variant="contained" color="primary">Save</Button>
+            <Button onClick={onSaveNotes} variant="contained" color="primary">Save</Button>
           </div>
-    </div>
         </div>
+      </div>
     </Container >
   );
 };
