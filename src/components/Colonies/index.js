@@ -66,13 +66,13 @@ function createData(title, description) {
   return { title, description };
 }
 
-const rows = [
-  createData('Colony A', 'This colony contains dogs'),
-  createData('Colony B', 'This colony contains #1 dog samples'),
-  createData('Colony C', 'This colony contains #2 dog samples'),
-  createData('Colony D', 'This colony contains #3 dog samples'),
-  createData('Colony E', 'This colony contains #4 dog samples'),
-];
+// const rows = [
+//   createData('Colony A', 'This colony contains dogs'),
+//   createData('Colony B', 'This colony contains #1 dog samples'),
+//   createData('Colony C', 'This colony contains #2 dog samples'),
+//   createData('Colony D', 'This colony contains #3 dog samples'),
+//   createData('Colony E', 'This colony contains #4 dog samples'),
+// ];
 
 const useStyles2 = makeStyles({
   table: {
@@ -83,6 +83,7 @@ const useStyles2 = makeStyles({
 });
 
 const Colonies = () => {
+  const { state: { ownedColonies } } = useProfileProvider();
   const { addColony } = useProfileProvider();
   const [file, setFile] = useState('');
   const [fileName, setFileName] = useState('');
@@ -90,7 +91,7 @@ const Colonies = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-
+  /* Uploading File. */
   const onChangeHandler = (event) => {
     setFile(event.target.files[0]);
     console.log(event.target.files[0].name);
@@ -113,9 +114,9 @@ const Colonies = () => {
     };
   };
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, ownedColonies.length - page * rowsPerPage);
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (newPage) => {
     setPage(newPage);
   };
 
@@ -133,10 +134,10 @@ const Colonies = () => {
         <Table className={classes.table} aria-label="custom pagination table">
           <TableBody>
             {(rowsPerPage > 0
-            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : rows
-          ).map(row => (
-            <TableRow key={row.name}>
+            ? ownedColonies.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            : ownedColonies
+          ).map(ownedColony => (
+            <TableRow key={ownedColony.uuid}>
               <TableCell
                 style={{ cursor: 'pointer' }}
                 component="th"
@@ -145,8 +146,8 @@ const Colonies = () => {
                 window.location = '/animals/colonyId';
               }}
               >
-                <div style={{ fontWeight: 'bold', fontSize: 18 }}>{row.title}</div>
-                <p style={{ color: '#333333' }}>{row.description}</p>
+                <div style={{ fontWeight: 'bold', fontSize: 18 }}>{ownedColony.colonyName}</div>
+                <p style={{ color: '#333333' }}>Size: {ownedColony.size}</p>
               </TableCell>
               <TableCell align="right">
                 <Button variant="outlined" color="primary">Share</Button>
@@ -165,7 +166,7 @@ const Colonies = () => {
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
                 colSpan={3}
-                count={rows.length}
+                count={ownedColonies.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 SelectProps={{
