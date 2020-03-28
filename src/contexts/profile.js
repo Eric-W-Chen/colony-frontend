@@ -2,7 +2,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import React, { createContext, useReducer, useContext } from 'react';
 
-const initialState = { loggedIn: true, name: {} };
+const initialState = { loggedIn: false, name: {} };
 const store = createContext(initialState);
 const { Provider } = store;
 
@@ -13,6 +13,7 @@ const LOGOUT = 'LOGOUT';
 const REGISTER = 'REGISTER';
 const ITEM = 'ITEM';
 const COLONY = 'COLONY';
+const ANIMALS = 'ANIMALS';
 
 axios.defaults.withCredentials = true;
 
@@ -35,6 +36,10 @@ const ProfileProvider = ({ children }) => {
       }
 
       case COLONY: {
+        return { ...prevState, ...payload };
+      }
+
+      case ANIMALS: {
         return { ...prevState, ...payload };
       }
 
@@ -75,6 +80,11 @@ const useProfileProvider = () => {
       dispatch({ type: COLONY, payload: data });
     });
 
+  const getAnimals = pageInfo => axios
+    .post(`${BASE_URL}/colony/animals`, pageInfo)
+    .then(({ data }) => {
+      dispatch({ type: ANIMALS, payload: data });
+    });
   // const addItem = credentials => axios
   //   .post(`${BASE_URL}/cart`, credentials)
   //   .then(({data}) => {

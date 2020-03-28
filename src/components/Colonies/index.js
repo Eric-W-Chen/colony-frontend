@@ -84,7 +84,7 @@ const useStyles2 = makeStyles({
 
 const Colonies = () => {
   const { state: { ownedColonies } } = useProfileProvider();
-  const { addColony } = useProfileProvider();
+  const { addColony, getAnimals } = useProfileProvider();
   const [file, setFile] = useState('');
   const [fileName, setFileName] = useState('');
   const classes = useStyles2();
@@ -143,6 +143,11 @@ const Colonies = () => {
                 component="th"
                 scope="row"
                 onClick={() => {
+                  const uuid = ownedColony.colonyId;
+                  const request = { colonyId: uuid, page, rowsPerPage};
+                  const animals = await getAnimals(request);
+
+                  
                 window.location = '/animals/colonyId';
               }}
               >
