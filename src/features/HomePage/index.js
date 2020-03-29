@@ -5,7 +5,7 @@ import Login from 'components/LoginForm';
 
 
 const HomePage = () => {
-  const { state, state: { loggedIn } } = useProfileProvider();
+  const { state: { loggedIn } } = useProfileProvider();
   return (
     <div className="home-page" style={{ textAlign: 'center' }}>
       { loggedIn ? <Redirect to="/dashboard" /> : <Login /> }

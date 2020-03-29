@@ -5,9 +5,9 @@ import { Button, Container, CssBaseline, Table, TableBody, TableCell, TableConta
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
-
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import IconButton from '@material-ui/core/IconButton';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 const useStyles1 = makeStyles(theme => ({
   root: {
@@ -71,7 +71,6 @@ const useStyles2 = makeStyles({
 
 const Colonies = () => {
   const { state: { ownedColonies } } = useProfileProvider();
-  console.log(ownedColonies);
   const { addColony, getAnimals } = useProfileProvider();
   const [file, setFile] = useState('');
   const [fileName, setFileName] = useState('');
@@ -113,8 +112,8 @@ const Colonies = () => {
     setPage(0);
   };
 
-  const handleCellClick = (uuid, page, rowsPerPage) => {
-      const request = { colonyId: uuid, page, rowsPerPage };
+  const handleCellClick = (uuid, rowsPerPage, page) => {
+      const request = { colonyId: uuid, rowsPerPage, page };
       getAnimals(request);
 
       return <Redirect to="/animals/colonyId"/>;
@@ -124,7 +123,7 @@ const Colonies = () => {
     <Container component="main">
       <CssBaseline />
       <input type="file" name="file" onChange={onChangeHandler} />
-      <Button onClick={onClickHandler} variant="outlined">Upload</Button>
+      <Button onClick={onClickHandler} variant="outlined" color="default" startIcon={<CloudUploadIcon />}>Upload</Button>
 
       <TableContainer className={classes.table} component={Paper}>
         <Table className={classes.table} aria-label="custom pagination table">
@@ -138,13 +137,13 @@ const Colonies = () => {
                   style={{ cursor: 'pointer' }}
                   component="th"
                   scope="row"
-                  onClick={handleCellClick(ownedColony.uuid, page, rowsPerPage)}
+                  onClick={() => handleCellClick(ownedColony.uuid, rowsPerPage, page)}
                 >
                   <div style={{ fontWeight: 'bold', fontSize: 18 }}>{ownedColony.colonyName}</div>
                   <p style={{ color: '#333333' }}>Size: {ownedColony.size}</p>
                 </TableCell>
                 <TableCell align="right">
-                  <Button variant="outlined" color="primary">Share</Button>
+                  <Button variant="contained" color="primary">Share</Button>
                 </TableCell>
               </TableRow>
             ))}
