@@ -132,6 +132,79 @@ const Animals = () => {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [openModal, setOpenModal] = React.useState(false);
   const [currentAnimal, setCurrentAnimal] = useState({});
+  const animals = [ { mouseId: 884,
+                      gender: F,
+                      litter: 4,
+                      fatherId: 284,
+                      motherId: 285,
+                      dobMonth: 3,
+                      dobDay: 29,
+                      dobYear: 2012,
+                      dodMonth: -1, 
+                      dodDay: -1,
+                      dodYear: -1,
+                      tod: "NA",
+                      notes: "",
+                      gene1: "+/-",
+                      gene2: "NA",
+                      gene3: "NA",
+                      photo: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+                    },
+                    { mouseId: 884,
+                      gender: F,
+                      litter: 4,
+                      fatherId: 284,
+                      motherId: 285,
+                      dobMonth: 3,
+                      dobDay: 29,
+                      dobYear: 2012,
+                      dodMonth: -1, 
+                      dodDay: -1,
+                      dodYear: -1,
+                      tod: "NA",
+                      notes: "",
+                      gene1: "+/-",
+                      gene2: "NA",
+                      gene3: "NA",
+                      photo: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+                    },
+                    { mouseId: 884,
+                      gender: F,
+                      litter: 4,
+                      fatherId: 284,
+                      motherId: 285,
+                      dobMonth: 3,
+                      dobDay: 29,
+                      dobYear: 2012,
+                      dodMonth: -1, 
+                      dodDay: -1,
+                      dodYear: -1,
+                      tod: "NA",
+                      notes: "",
+                      gene1: "+/-",
+                      gene2: "NA",
+                      gene3: "NA",
+                      photo: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+                    },
+                    { mouseId: 884,
+                      gender: F,
+                      litter: 4,
+                      fatherId: 284,
+                      motherId: 285,
+                      dobMonth: 3,
+                      dobDay: 29,
+                      dobYear: 2012,
+                      dodMonth: -1, 
+                      dodDay: -1,
+                      dodYear: -1,
+                      tod: "NA",
+                      notes: "",
+                      gene1: "+/-",
+                      gene2: "NA",
+                      gene3: "NA",
+                      photo: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+                    },
+];
 
 
   // Use the useEffect hook to get the animals using the id
@@ -191,10 +264,10 @@ const Animals = () => {
         <Table className={classes.table} aria-label="custom pagination table">
           <TableBody>
             {(rowsPerPage > 0
-            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : rows
-          ).map(row => (
-            <TableRow key={row.name}>
+            ? animals.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            : animals
+          ).map(animal => (
+            <TableRow key={animal.mouseId}>
               <TableCell
                 style={{ cursor: 'pointer' }}
                 component="th"
@@ -204,8 +277,8 @@ const Animals = () => {
               }}
               >
                 <div style={{ fontWeight: 'bold', fontSize: 18, flexDirection: 'row' }}>
-                  <Avatar alt={row.name} src={row.photo} className={classes.large} />
-                  <span>{row.name}</span>
+                  <Avatar alt={animal.mouseId} src={animal.photo} className={classes.large} />
+                  <span>{animal.mouseId}</span>
                 </div>
               </TableCell>
               <TableCell align="right">
