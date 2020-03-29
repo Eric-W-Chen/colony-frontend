@@ -100,6 +100,17 @@ const Register = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                type="email"
+                name="email"
+                variant="outlined"
+                required
+                fullWidth
+                label="Email"
+                onChange={updateInput}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
                 type="username"
                 name="username"
                 variant="outlined"
