@@ -25,7 +25,6 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard" style={{ textAlign: 'center' }}>
-      <h1>{`Welcome ${first}!`}</h1>
       <Logout />
       <Colonies />
 
