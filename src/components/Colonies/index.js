@@ -84,6 +84,7 @@ const useStyles2 = makeStyles({
 
 const Colonies = () => {
   const { state: { ownedColonies } } = useProfileProvider();
+  console.log(ownedColonies);
   const { addColony, getAnimals } = useProfileProvider();
   const [file, setFile] = useState('');
   const [fileName, setFileName] = useState('');
@@ -114,7 +115,13 @@ const Colonies = () => {
     };
   };
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, ownedColonies.length - page * rowsPerPage);
+  // const emptyRows = rowsPerPage - Math.min(rowsPerPage, ownedColonies.length - page * rowsPerPage);
+  var emptyRows = rowsPerPage;
+
+  if (typeof ownedColonies !== 'undefined') {
+    emptyRows = rowsPerPage - Math.min(rowsPerPage, ownedColonies.length - page * rowsPerPage);
+  }
+
 
   const handleChangePage = (newPage) => {
     setPage(newPage);
@@ -124,6 +131,7 @@ const Colonies = () => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+
   return (
     <Container component="main">
       <CssBaseline />
@@ -134,37 +142,37 @@ const Colonies = () => {
         <Table className={classes.table} aria-label="custom pagination table">
           <TableBody>
             {(rowsPerPage > 0
-            ? ownedColonies.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : ownedColonies
-          ).map(ownedColony => (
-            <TableRow key={ownedColony.uuid}>
-              <TableCell
-                style={{ cursor: 'pointer' }}
-                component="th"
-                scope="row"
-                onClick={() => {
-                  const uuid = ownedColony.colonyId;
-                  const request = { colonyId: uuid, page, rowsPerPage};
-                  const animals = await getAnimals(request);
+              ? ownedColonies.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              : ownedColonies
+            ).map(ownedColony => (
+              <TableRow key={ownedColony.uuid}>
+                <TableCell
+                  style={{ cursor: 'pointer' }}
+                  component="th"
+                  scope="row"
+                  onClick={() => {
+                    // const uuid = ownedColony.colonyId;
+                    // const request = { colonyId: uuid, page, rowsPerPage };
+                    // const animals = await getAnimals(request);
 
-                  
-                window.location = '/animals/colonyId';
-              }}
-              >
-                <div style={{ fontWeight: 'bold', fontSize: 18 }}>{ownedColony.colonyName}</div>
-                <p style={{ color: '#333333' }}>Size: {ownedColony.size}</p>
-              </TableCell>
-              <TableCell align="right">
-                <Button variant="outlined" color="primary">Share</Button>
-              </TableCell>
-            </TableRow>
-          ))}
+
+                    window.location = '/animals/colonyId';
+                  }}
+                >
+                  <div style={{ fontWeight: 'bold', fontSize: 18 }}>{ownedColony.colonyName}</div>
+                  <p style={{ color: '#333333' }}>Size: {ownedColony.size}</p>
+                </TableCell>
+                <TableCell align="right">
+                  <Button variant="outlined" color="primary">Share</Button>
+                </TableCell>
+              </TableRow>
+            ))}
 
             {emptyRows > 0 && (
-            <TableRow style={{ height: 53 * emptyRows }}>
-              <TableCell colSpan={6} />
-            </TableRow>
-          )}
+              <TableRow style={{ height: 53 * emptyRows }}>
+                <TableCell colSpan={6} />
+              </TableRow>
+            )}
           </TableBody>
           <TableFooter>
             <TableRow>
@@ -175,9 +183,9 @@ const Colonies = () => {
                 rowsPerPage={rowsPerPage}
                 page={page}
                 SelectProps={{
-                inputProps: { 'aria-label': 'rows per page' },
-                native: true,
-              }}
+                  inputProps: { 'aria-label': 'rows per page' },
+                  native: true,
+                }}
                 onChangePage={handleChangePage}
                 onChangeRowsPerPage={handleChangeRowsPerPage}
               />
