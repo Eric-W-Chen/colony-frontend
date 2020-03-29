@@ -7,7 +7,7 @@ import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
 
 import IconButton from '@material-ui/core/IconButton';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 const useStyles1 = makeStyles(theme => ({
   root: {
@@ -61,19 +61,6 @@ function TablePaginationActions(props) {
   );
 }
 
-
-function createData(title, description) {
-  return { title, description };
-}
-
-// const rows = [
-//   createData('Colony A', 'This colony contains dogs'),
-//   createData('Colony B', 'This colony contains #1 dog samples'),
-//   createData('Colony C', 'This colony contains #2 dog samples'),
-//   createData('Colony D', 'This colony contains #3 dog samples'),
-//   createData('Colony E', 'This colony contains #4 dog samples'),
-// ];
-
 const useStyles2 = makeStyles({
   table: {
     width: '100%',
@@ -115,13 +102,7 @@ const Colonies = () => {
     };
   };
 
-  // const emptyRows = rowsPerPage - Math.min(rowsPerPage, ownedColonies.length - page * rowsPerPage);
-  var emptyRows = rowsPerPage;
-
-  if (typeof ownedColonies !== 'undefined') {
-    emptyRows = rowsPerPage - Math.min(rowsPerPage, ownedColonies.length - page * rowsPerPage);
-  }
-
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, ownedColonies.length - page * rowsPerPage);
 
   const handleChangePage = (newPage) => {
     setPage(newPage);
@@ -131,6 +112,13 @@ const Colonies = () => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+
+  const handleCellClick = (uuid, page, rowsPerPage) => {
+      const request = { colonyId: uuid, page, rowsPerPage };
+      getAnimals(request);
+
+      return <Redirect to="/animals/colonyId"/>;
+  }
 
   return (
     <Container component="main">
@@ -150,14 +138,7 @@ const Colonies = () => {
                   style={{ cursor: 'pointer' }}
                   component="th"
                   scope="row"
-                  onClick={() => {
-                    // const uuid = ownedColony.colonyId;
-                    // const request = { colonyId: uuid, page, rowsPerPage };
-                    // const animals = await getAnimals(request);
-
-
-                    window.location = '/animals/colonyId';
-                  }}
+                  onClick={handleCellClick(ownedColony.uuid, page, rowsPerPage)}
                 >
                   <div style={{ fontWeight: 'bold', fontSize: 18 }}>{ownedColony.colonyName}</div>
                   <p style={{ color: '#333333' }}>Size: {ownedColony.size}</p>

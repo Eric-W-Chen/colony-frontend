@@ -40,7 +40,7 @@ const ProfileProvider = ({ children }) => {
       }
 
       case ANIMALS: {
-        return { ...prevState, payload };
+        return { ...prevState, ...payload };
       }
 
       case LOGOUT: {
@@ -85,17 +85,6 @@ const useProfileProvider = () => {
     .then(({ data }) => {
       dispatch({ type: ANIMALS, payload: data });
     });
-  // const addItem = credentials => axios
-  //   .post(`${BASE_URL}/cart`, credentials)
-  //   .then(({data}) => {
-  //     dispatch({ type: ITEM, payload: data })
-  //   });
-
-  // const getCart = () => axios
-  //   .get(`${BASE_URL}/cart`)
-  //   .then(({data}) => {
-  //     dispatch({ type: ITEM, payload: data })
-  //   });
 
   return {
     state,
@@ -104,6 +93,7 @@ const useProfileProvider = () => {
     logout,
     register,
     addColony,
+    getAnimals,
   };
 };
 
