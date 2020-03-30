@@ -86,10 +86,8 @@ const Colonies = () => {
   const [file, setFile] = useState('');
   const [fileName, setFileName] = useState('');
   const classes = tableStyle();
-  const [page, setPage] = React.useState(0);
-  const [upload, setUpload] = React.useState(false);
+  const [page, setPage] = useState(0);
   const rowsPerPage = 10;
-
   const [redirectToAnimals, setRedirectToAnimals] = useState(false);
 
 
@@ -107,7 +105,6 @@ const Colonies = () => {
       const load = reader.result;
       const data = { payload: load, name: fileName };
       await addColony(data);
-      setUpload(true);
     };
 
     reader.onerror = () => {
@@ -133,9 +130,9 @@ const Colonies = () => {
   };
 
   const handleCellClick = (uuid, rowsPerPage, page) => {
-    const request = { colonyId: uuid, rowsPerPage, page };
-    getAnimals(request);
-    console.log(state);
+    // const request = { colonyId: uuid, rowsPerPage, page };
+    // getAnimals(request);
+    // console.log(state);
     setRedirectToAnimals(true);
   }
 
