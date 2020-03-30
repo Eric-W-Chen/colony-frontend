@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useProfileProvider } from 'contexts/profile';
 import { Button } from '@material-ui/core';
 import { Redirect } from 'react-router-dom';
 import Animals from 'components/Animals';
@@ -15,7 +14,7 @@ const Colony = () => {
   return (
     <div className="animals">
       <Button onClick={() => setRedirectToColonies(true)}>Back to colonies</Button>
-      <Animals /> 
+      <Animals />
     </div>
   );
 };

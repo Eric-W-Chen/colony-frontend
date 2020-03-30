@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
-import { useProfileProvider } from 'contexts/profile';
+import React from 'react';
 import Logout from 'components/Logout';
 import Colonies from 'components/Colonies';
 // import ItemForm from 'components/ItemForm';
 // import Cart from 'components/Cart';
 
 const Dashboard = () => {
-  const { getCart } = useProfileProvider();
-  const { state, state: { name: { first } } } = useProfileProvider();
+  // const { getCart } = useProfileProvider();
+  // const { state, state: { name: { first } } } = useProfileProvider();
   // const [showCart, setShowCart] = useState(false);
   // const [cartToggle, setCartToggle] = useState(false);
 

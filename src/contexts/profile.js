@@ -2,7 +2,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import React, { createContext, useReducer, useContext } from 'react';
 
-const initialState = { loggedIn: false, name: {} };
+const initialState = { loggedIn: false, name: {}, colonies: [] };
 const store = createContext(initialState);
 const { Provider } = store;
 
@@ -11,7 +11,6 @@ const BASE_URL = 'https://animal-colony-76d9b.firebaseapp.com/api';
 const LOGIN = 'LOGIN';
 const LOGOUT = 'LOGOUT';
 const REGISTER = 'REGISTER';
-const ITEM = 'ITEM';
 const COLONY = 'COLONY';
 const ANIMALS = 'ANIMALS';
 
@@ -28,18 +27,18 @@ const ProfileProvider = ({ children }) => {
       }
 
       case REGISTER: {
+        // Store registered profile in the state
         return { ...prevState, loggedIn: true, ...payload };
       }
 
-      case ITEM: {
-        return { ...prevState, ...payload };
-      }
-
       case COLONY: {
-        return { ...prevState, ...payload };
+        // Store colonies in the state
+        return { ...prevState, colonies: payload };
       }
 
       case ANIMALS: {
+        // Store colony animals in the state
+        console.log(payload);
         return { ...prevState, ...payload };
       }
 
@@ -80,11 +79,13 @@ const useProfileProvider = () => {
       dispatch({ type: COLONY, payload: data });
     });
 
+
   const getAnimals = pageInfo => axios
     .post(`${BASE_URL}/colony/animals`, pageInfo)
     .then(({ data }) => {
       dispatch({ type: ANIMALS, payload: data });
     });
+
 
   return {
     state,

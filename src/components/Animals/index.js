@@ -124,6 +124,7 @@ const useStyles2 = makeStyles(theme => ({
 
 const Animals = () => {
   const { animals, addColony } = useProfileProvider();
+
   const { id } = useParams();
   const [file, setFile] = useState('');
   const [fileName, setFileName] = useState('');
