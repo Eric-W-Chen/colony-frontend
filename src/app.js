@@ -17,7 +17,7 @@ const App = () => (
   <Router>
     <ProfileProvider>
       <Switch>
-        <ProtectedRoute path="/dashboard" component={Dashboard} />
+        <ProtectedRoute exact path="/dashboard" component={Dashboard} />
         <ProtectedRoute path="/dashboard/colony" component={Colony} />
         <ProtectedRoute path="/animals/:id" component={Animals} />
         <ProtectedRoute path="/animal/:id" component={SingleAnimal} />
