@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useProfileProvider } from 'contexts/profile';
 import { Redirect } from 'react-router-dom';
 
-import { Button, Container, CssBaseline, Table, TableBody, TableCell, TableContainer, TableRow, Paper } from '@material-ui/core';
+import { Button, TextField, Container, CssBaseline, Table, TableBody, TableCell, TableContainer, TableRow, Paper } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
@@ -25,8 +25,6 @@ function TablePaginationActions(props) {
   const classes = paginationStyle();
   const theme = useTheme();
   const { count, page, rowsPerPage, onChangePage } = props;
-
-  console.log(props.page);
 
   const handleFirstPageButtonClick = (event) => {
     onChangePage(event, 0);
@@ -89,19 +87,18 @@ const Colonies = () => {
   const [fileName, setFileName] = useState('');
   const classes = tableStyle();
   const [page, setPage] = React.useState(0);
+  const [upload, setUpload] = React.useState(false);
   const rowsPerPage = 10;
 
   const [redirectToAnimals, setRedirectToAnimals] = useState(false);
 
 
   /* Uploading File. */
-  const onChangeHandler = (event) => {
+  const chooseFile = (event) => {
     setFile(event.target.files[0]);
-    console.log(event.target.files[0].name);
-    setFileName(event.target.files[0].name);
   };
 
-  const onClickHandler = async () => {
+  const uploadFile = async () => {
     const reader = new FileReader();
 
     reader.readAsText(file);
@@ -110,11 +107,22 @@ const Colonies = () => {
       const load = reader.result;
       const data = { payload: load, name: fileName };
       await addColony(data);
+      setUpload(true);
     };
 
     reader.onerror = () => {
       console.log(reader.onerror);
     };
+  };
+
+  /**
+ * Updates input for file name.
+ * 
+ * @param name
+ * @param value
+ */
+  const updateInput = ({ target: { value } }) => {
+    setFileName(value);
   };
 
   /* Pagination handler */
@@ -140,8 +148,11 @@ const Colonies = () => {
     <Container component="main">
       <CssBaseline />
       <div className="uploadFile">
-        <input type="file" name="file" onChange={onChangeHandler} />
-        <Button onClick={onClickHandler} variant="outlined" color="default" startIcon={<CloudUploadIcon />}>Upload</Button>
+        <input type="file" name="file" onChange={chooseFile} />
+        <div>
+          <TextField variant="outlined" margin="dense" size="small" name="colonyName" label="Colony Name" onChange={updateInput} />
+        </div>
+        <Button onClick={uploadFile} variant="outlined" color="default" startIcon={<CloudUploadIcon />}>Upload</Button>
       </div>
       <TableContainer className={classes.table} component={Paper}>
         <Table className={classes.table} aria-label="custom pagination table">

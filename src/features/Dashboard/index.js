@@ -23,7 +23,9 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard" style={{ textAlign: 'center' }}>
-      <Logout />
+      <div style={{textAlign: 'left' }}>
+        <Logout />
+      </div>
       <Colonies />
 
       {/* {cartToggle ? <Button

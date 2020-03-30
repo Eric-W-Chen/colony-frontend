@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { useProfileProvider } from 'contexts/profile';
 import { useParams, useHistory } from 'react-router-dom';
 import { Button, Container, CssBaseline, Paper, Avatar } from '@material-ui/core';
-import Modal from '@material-ui/core/Modal';
+// import Modal from '@material-ui/core/Modal';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
+// import IconButton from '@material-ui/core/IconButton';
 
 
 const useStyles2 = makeStyles(theme => ({
@@ -54,15 +54,15 @@ const useStyles2 = makeStyles(theme => ({
 
 
 const SingleAnimal = () => {
-  const { addColony } = useProfileProvider();
+  // const { addColony } = useProfileProvider();
   const { id } = useParams();
   const history = useHistory();
-  const [file, setFile] = useState('');
-  const [fileName, setFileName] = useState('');
+  // const [file, setFile] = useState('');
+  // const [fileName, setFileName] = useState('');
   const classes = useStyles2();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [openModal, setOpenModal] = React.useState(false);
+  // const [page, setPage] = React.useState(0);
+  // const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  // const [openModal, setOpenModal] = React.useState(false);
   const [currentAnimal, setCurrentAnimal] = useState({});
   const [notes, setNotes] = useState('');
 
