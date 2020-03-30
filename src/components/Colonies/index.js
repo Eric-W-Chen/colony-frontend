@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { useProfileProvider } from 'contexts/profile';
-import { Button, Container, CssBaseline, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
+import { Redirect } from 'react-router-dom';
 
+import { Button, Container, CssBaseline, Table, TableBody, TableCell, TableContainer, TableRow, Paper } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import IconButton from '@material-ui/core/IconButton';
+import FirstPageIcon from '@material-ui/icons/FirstPage';
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import LastPageIcon from '@material-ui/icons/LastPage';
 import Share from '@material-ui/icons/Share';
-import { Redirect } from 'react-router-dom';
 
-const useStyles1 = makeStyles(theme => ({
+const paginationStyle = makeStyles(theme => ({
   root: {
     flexShrink: 0,
     marginLeft: theme.spacing(2.5),
@@ -18,11 +22,11 @@ const useStyles1 = makeStyles(theme => ({
 }));
 
 function TablePaginationActions(props) {
-  const classes = useStyles1();
+  const classes = paginationStyle();
   const theme = useTheme();
-  const {
-    count, page, rowsPerPage, onChangePage,
-  } = props;
+  const { count, page, rowsPerPage, onChangePage } = props;
+
+  console.log(props.page);
 
   const handleFirstPageButtonClick = (event) => {
     onChangePage(event, 0);
@@ -46,23 +50,31 @@ function TablePaginationActions(props) {
         onClick={handleFirstPageButtonClick}
         disabled={page === 0}
         aria-label="first page"
-      />
-      <IconButton onClick={handleBackButtonClick} disabled={page === 0} aria-label="previous page" />
+      >
+        {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+      </IconButton>
+      <IconButton onClick={handleBackButtonClick} disabled={page === 0} aria-label="previous page">
+        {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+      </IconButton>
       <IconButton
         onClick={handleNextButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="next page"
-      />
+      >
+        {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+      </IconButton>
       <IconButton
         onClick={handleLastPageButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="last page"
-      />
+      >
+        {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+      </IconButton>
     </div>
   );
 }
 
-const useStyles2 = makeStyles({
+const tableStyle = makeStyles({
   table: {
     width: '100%',
     minWidth: 500,
@@ -75,9 +87,9 @@ const Colonies = () => {
   const { addColony, getAnimals } = useProfileProvider();
   const [file, setFile] = useState('');
   const [fileName, setFileName] = useState('');
-  const classes = useStyles2();
+  const classes = tableStyle();
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const rowsPerPage = 10;
 
   const [redirectToAnimals, setRedirectToAnimals] = useState(false);
 
@@ -108,32 +120,29 @@ const Colonies = () => {
   /* Pagination handler */
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, ownedColonies.length - page * rowsPerPage);
 
-  const handleChangePage = (newPage) => {
+  const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
   const handleCellClick = (uuid, rowsPerPage, page) => {
-      const request = { colonyId: uuid, rowsPerPage, page };
-      getAnimals(request);
-      console.log(state);
-      setRedirectToAnimals(true);
+    const request = { colonyId: uuid, rowsPerPage, page };
+    getAnimals(request);
+    console.log(state);
+    setRedirectToAnimals(true);
   }
 
+
   if (redirectToAnimals) {
-    return <Redirect to="/dashboard/colony"/>;
+    return <Redirect to="/dashboard/colony" />;
   }
 
   return (
     <Container component="main">
       <CssBaseline />
-      <input type="file" name="file" onChange={onChangeHandler} />
-      <Button onClick={onClickHandler} variant="outlined" color="default" startIcon={<CloudUploadIcon />}>Upload</Button>
-
+      <div className="uploadFile">
+        <input type="file" name="file" onChange={onChangeHandler} />
+        <Button onClick={onClickHandler} variant="outlined" color="default" startIcon={<CloudUploadIcon />}>Upload</Button>
+      </div>
       <TableContainer className={classes.table} component={Paper}>
         <Table className={classes.table} aria-label="custom pagination table">
           <TableBody>
@@ -166,7 +175,7 @@ const Colonies = () => {
           <TableFooter>
             <TableRow>
               <TablePagination
-                rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+                rowsPerPageOptions={[]}
                 colSpan={3}
                 count={ownedColonies.length}
                 rowsPerPage={rowsPerPage}
@@ -176,7 +185,7 @@ const Colonies = () => {
                   native: true,
                 }}
                 onChangePage={handleChangePage}
-                onChangeRowsPerPage={handleChangeRowsPerPage}
+                ActionsComponent={TablePaginationActions}
               />
             </TableRow>
           </TableFooter>
