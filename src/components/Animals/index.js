@@ -68,17 +68,17 @@ function TablePaginationActions(props) {
 }
 
 
-function createData(id, name, photo) {
-  return { id, name, photo };
-}
+// function createData(id, name, photo) {
+//   return { id, name, photo };
+// }
 
-const rows = [
-  createData(1, 'Animal A', 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
-  createData(2, 'Animal B', 'https://cdn.pixabay.com/photo/2016/12/13/05/15/puppy-1903313__340.jpg'),
-  createData(3, 'Animal C', 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/chihuahua-dog-running-across-grass-royalty-free-image-1580743445.jpg?crop=0.655xw:0.983xh;0.107xw,0&resize=640:*'),
-  createData(4, 'Animal D', 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-laying-on-grass-high-res-stock-photography-1574096636.jpg?crop=0.722xw:1.00xh;0.140xw,0&resize=640:*'),
-  createData(5, 'Animal E', 'https://images.theconversation.com/files/205966/original/file-20180212-58348-7huv6f.jpeg?ixlib=rb-1.1.0&q=45&auto=format&w=926&fit=clip'),
-];
+// const rows = [
+//   createData(1, 'Animal A', 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
+//   createData(2, 'Animal B', 'https://cdn.pixabay.com/photo/2016/12/13/05/15/puppy-1903313__340.jpg'),
+//   createData(3, 'Animal C', 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/chihuahua-dog-running-across-grass-royalty-free-image-1580743445.jpg?crop=0.655xw:0.983xh;0.107xw,0&resize=640:*'),
+//   createData(4, 'Animal D', 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-laying-on-grass-high-res-stock-photography-1574096636.jpg?crop=0.722xw:1.00xh;0.140xw,0&resize=640:*'),
+//   createData(5, 'Animal E', 'https://images.theconversation.com/files/205966/original/file-20180212-58348-7huv6f.jpeg?ixlib=rb-1.1.0&q=45&auto=format&w=926&fit=clip'),
+// ];
 
 const useStyles2 = makeStyles(theme => ({
   table: {
@@ -123,7 +123,7 @@ const useStyles2 = makeStyles(theme => ({
 
 
 const Animals = () => {
-  const { addColony } = useProfileProvider();
+  const { animals, addColony } = useProfileProvider();
   const { id } = useParams();
   const [file, setFile] = useState('');
   const [fileName, setFileName] = useState('');
@@ -132,79 +132,79 @@ const Animals = () => {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [openModal, setOpenModal] = React.useState(false);
   const [currentAnimal, setCurrentAnimal] = useState({});
-  const animals = [ { mouseId: 884,
-                      gender: F,
-                      litter: 4,
-                      fatherId: 284,
-                      motherId: 285,
-                      dobMonth: 3,
-                      dobDay: 29,
-                      dobYear: 2012,
-                      dodMonth: -1, 
-                      dodDay: -1,
-                      dodYear: -1,
-                      tod: "NA",
-                      notes: "",
-                      gene1: "+/-",
-                      gene2: "NA",
-                      gene3: "NA",
-                      photo: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-                    },
-                    { mouseId: 884,
-                      gender: F,
-                      litter: 4,
-                      fatherId: 284,
-                      motherId: 285,
-                      dobMonth: 3,
-                      dobDay: 29,
-                      dobYear: 2012,
-                      dodMonth: -1, 
-                      dodDay: -1,
-                      dodYear: -1,
-                      tod: "NA",
-                      notes: "",
-                      gene1: "+/-",
-                      gene2: "NA",
-                      gene3: "NA",
-                      photo: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-                    },
-                    { mouseId: 884,
-                      gender: F,
-                      litter: 4,
-                      fatherId: 284,
-                      motherId: 285,
-                      dobMonth: 3,
-                      dobDay: 29,
-                      dobYear: 2012,
-                      dodMonth: -1, 
-                      dodDay: -1,
-                      dodYear: -1,
-                      tod: "NA",
-                      notes: "",
-                      gene1: "+/-",
-                      gene2: "NA",
-                      gene3: "NA",
-                      photo: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-                    },
-                    { mouseId: 884,
-                      gender: F,
-                      litter: 4,
-                      fatherId: 284,
-                      motherId: 285,
-                      dobMonth: 3,
-                      dobDay: 29,
-                      dobYear: 2012,
-                      dodMonth: -1, 
-                      dodDay: -1,
-                      dodYear: -1,
-                      tod: "NA",
-                      notes: "",
-                      gene1: "+/-",
-                      gene2: "NA",
-                      gene3: "NA",
-                      photo: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-                    },
-];
+//   const animals = [ { mouseId: 884,
+//                       gender: "F",
+//                       litter: 4,
+//                       fatherId: 284,
+//                       motherId: 285,
+//                       dobMonth: 3,
+//                       dobDay: 29,
+//                       dobYear: 2012,
+//                       dodMonth: -1, 
+//                       dodDay: -1,
+//                       dodYear: -1,
+//                       tod: "NA",
+//                       notes: "",
+//                       gene1: "+/-",
+//                       gene2: "NA",
+//                       gene3: "NA",
+//                       photo: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+//                     },
+//                     { mouseId: 884,
+//                       gender: "F",
+//                       litter: 4,
+//                       fatherId: 284,
+//                       motherId: 285,
+//                       dobMonth: 3,
+//                       dobDay: 29,
+//                       dobYear: 2012,
+//                       dodMonth: -1, 
+//                       dodDay: -1,
+//                       dodYear: -1,
+//                       tod: "NA",
+//                       notes: "",
+//                       gene1: "+/-",
+//                       gene2: "NA",
+//                       gene3: "NA",
+//                       photo: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+//                     },
+//                     { mouseId: 884,
+//                       gender: "F",
+//                       litter: 4,
+//                       fatherId: 284,
+//                       motherId: 285,
+//                       dobMonth: 3,
+//                       dobDay: 29,
+//                       dobYear: 2012,
+//                       dodMonth: -1, 
+//                       dodDay: -1,
+//                       dodYear: -1,
+//                       tod: "NA",
+//                       notes: "",
+//                       gene1: "+/-",
+//                       gene2: "NA",
+//                       gene3: "NA",
+//                       photo: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+//                     },
+//                     { mouseId: 884,
+//                       gender: "F",
+//                       litter: 4,
+//                       fatherId: 284,
+//                       motherId: 285,
+//                       dobMonth: 3,
+//                       dobDay: 29,
+//                       dobYear: 2012,
+//                       dodMonth: -1, 
+//                       dodDay: -1,
+//                       dodYear: -1,
+//                       tod: "NA",
+//                       notes: "",
+//                       gene1: "+/-",
+//                       gene2: "NA",
+//                       gene3: "NA",
+//                       photo: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+//                     },
+// ];
 
 
   // Use the useEffect hook to get the animals using the id
@@ -232,7 +232,7 @@ const Animals = () => {
     };
   };
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, animals.length - page * rowsPerPage);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -273,7 +273,7 @@ const Animals = () => {
                 component="th"
                 scope="row"
                 onClick={() => {
-                handleOpenModal(row);
+                handleOpenModal(animal);
               }}
               >
                 <div style={{ fontWeight: 'bold', fontSize: 18, flexDirection: 'row' }}>
@@ -305,7 +305,7 @@ const Animals = () => {
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
                 colSpan={3}
-                count={rows.length}
+                count={animals.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 SelectProps={{
@@ -368,8 +368,6 @@ const Animals = () => {
 
         </div>
       </Modal>
-
-
     </Container >
   );
 };

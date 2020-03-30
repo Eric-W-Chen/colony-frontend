@@ -7,6 +7,7 @@ import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import IconButton from '@material-ui/core/IconButton';
+import Share from '@material-ui/icons/Share';
 import { Redirect } from 'react-router-dom';
 
 const useStyles1 = makeStyles(theme => ({
@@ -72,11 +73,15 @@ const useStyles2 = makeStyles({
 const Colonies = () => {
   const { state: { ownedColonies } } = useProfileProvider();
   const { addColony, getAnimals } = useProfileProvider();
+
   const [file, setFile] = useState('');
   const [fileName, setFileName] = useState('');
   const classes = useStyles2();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  const [redirectToAnimals, setRedirectToAnimals] = useState(false);
+
 
   /* Uploading File. */
   const onChangeHandler = (event) => {
@@ -101,6 +106,7 @@ const Colonies = () => {
     };
   };
 
+  /* Pagination handler */
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, ownedColonies.length - page * rowsPerPage);
 
   const handleChangePage = (newPage) => {
@@ -116,7 +122,11 @@ const Colonies = () => {
       const request = { colonyId: uuid, rowsPerPage, page };
       getAnimals(request);
 
-      return <Redirect to="/animals/colonyId"/>;
+      setRedirectToAnimals(true);
+  }
+
+  if (redirectToAnimals) {
+    return <Redirect to="/dashboard/colony"/>;
   }
 
   return (
@@ -132,18 +142,18 @@ const Colonies = () => {
               ? ownedColonies.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               : ownedColonies
             ).map(ownedColony => (
-              <TableRow key={ownedColony.uuid}>
+              <TableRow key={ownedColony.colonyId}>
                 <TableCell
                   style={{ cursor: 'pointer' }}
                   component="th"
                   scope="row"
-                  onClick={() => handleCellClick(ownedColony.uuid, rowsPerPage, page)}
+                  onClick={() => handleCellClick(ownedColony.colonyId, rowsPerPage, page)}
                 >
                   <div style={{ fontWeight: 'bold', fontSize: 18 }}>{ownedColony.colonyName}</div>
                   <p style={{ color: '#333333' }}>Size: {ownedColony.size}</p>
                 </TableCell>
                 <TableCell align="right">
-                  <Button variant="contained" color="primary">Share</Button>
+                  <Button variant="contained" color="primary" startIcon={<Share />}>Share</Button>
                 </TableCell>
               </TableRow>
             ))}

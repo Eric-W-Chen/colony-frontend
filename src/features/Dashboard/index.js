@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useProfileProvider } from 'contexts/profile';
-import { Button } from '@material-ui/core';
 import Logout from 'components/Logout';
 import Colonies from 'components/Colonies';
 // import ItemForm from 'components/ItemForm';

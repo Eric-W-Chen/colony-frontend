@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useProfileProvider } from 'contexts/profile';
 import { Button } from '@material-ui/core';
+import ExitToApp from '@material-ui/icons/ExitToApp';
 
 const Logout = ({ redirectURL }) => {
   const { logout } = useProfileProvider();
@@ -17,7 +18,7 @@ const Logout = ({ redirectURL }) => {
     return <Redirect to={redirectURL} />;
   }
   return (
-    <Button onClick={handleLogout} variant="outlined">
+    <Button variant="outlined" startIcon={<ExitToApp />} onClick={handleLogout}>
       Logout
     </Button>
   );
