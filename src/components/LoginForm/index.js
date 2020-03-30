@@ -68,9 +68,9 @@ const Login = () => {
             margin="normal"
             required
             fullWidth
-            label="Username"
-            name="username"
-            type="username"
+            label="Email"
+            name="email"
+            type="email;"
             autoFocus
             onChange={updateInput}
           />
