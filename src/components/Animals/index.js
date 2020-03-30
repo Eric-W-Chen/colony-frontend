@@ -135,115 +135,92 @@ const useStyles2 = makeStyles(theme => ({
 
 
 const Animals = () => {
-  const { animals, addColony } = useProfileProvider();
+  // const { animals, addColony } = useProfileProvider();
 
   const { id } = useParams();
-  const [file, setFile] = useState('');
-  const [fileName, setFileName] = useState('');
   const classes = useStyles2();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [openModal, setOpenModal] = React.useState(false);
   const [currentAnimal, setCurrentAnimal] = useState({});
-//   const animals = [ { mouseId: 884,
-//                       gender: "F",
-//                       litter: 4,
-//                       fatherId: 284,
-//                       motherId: 285,
-//                       dobMonth: 3,
-//                       dobDay: 29,
-//                       dobYear: 2012,
-//                       dodMonth: -1, 
-//                       dodDay: -1,
-//                       dodYear: -1,
-//                       tod: "NA",
-//                       notes: "",
-//                       gene1: "+/-",
-//                       gene2: "NA",
-//                       gene3: "NA",
-//                       photo: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-//                     },
-//                     { mouseId: 884,
-//                       gender: "F",
-//                       litter: 4,
-//                       fatherId: 284,
-//                       motherId: 285,
-//                       dobMonth: 3,
-//                       dobDay: 29,
-//                       dobYear: 2012,
-//                       dodMonth: -1, 
-//                       dodDay: -1,
-//                       dodYear: -1,
-//                       tod: "NA",
-//                       notes: "",
-//                       gene1: "+/-",
-//                       gene2: "NA",
-//                       gene3: "NA",
-//                       photo: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-//                     },
-//                     { mouseId: 884,
-//                       gender: "F",
-//                       litter: 4,
-//                       fatherId: 284,
-//                       motherId: 285,
-//                       dobMonth: 3,
-//                       dobDay: 29,
-//                       dobYear: 2012,
-//                       dodMonth: -1, 
-//                       dodDay: -1,
-//                       dodYear: -1,
-//                       tod: "NA",
-//                       notes: "",
-//                       gene1: "+/-",
-//                       gene2: "NA",
-//                       gene3: "NA",
-//                       photo: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-//                     },
-//                     { mouseId: 884,
-//                       gender: "F",
-//                       litter: 4,
-//                       fatherId: 284,
-//                       motherId: 285,
-//                       dobMonth: 3,
-//                       dobDay: 29,
-//                       dobYear: 2012,
-//                       dodMonth: -1, 
-//                       dodDay: -1,
-//                       dodYear: -1,
-//                       tod: "NA",
-//                       notes: "",
-//                       gene1: "+/-",
-//                       gene2: "NA",
-//                       gene3: "NA",
-//                       photo: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-//                     },
-// ];
+  const animals = [ { mouseId: 884,
+                      gender: "F",
+                      litter: 4,
+                      fatherId: 284,
+                      motherId: 285,
+                      dobMonth: 3,
+                      dobDay: 29,
+                      dobYear: 2012,
+                      dodMonth: -1, 
+                      dodDay: -1,
+                      dodYear: -1,
+                      tod: "NA",
+                      notes: "",
+                      gene1: "+/-",
+                      gene2: "NA",
+                      gene3: "NA",
+                      photo: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+                    },
+                    { mouseId: 884,
+                      gender: "F",
+                      litter: 4,
+                      fatherId: 284,
+                      motherId: 285,
+                      dobMonth: 3,
+                      dobDay: 29,
+                      dobYear: 2012,
+                      dodMonth: -1, 
+                      dodDay: -1,
+                      dodYear: -1,
+                      tod: "NA",
+                      notes: "",
+                      gene1: "+/-",
+                      gene2: "NA",
+                      gene3: "NA",
+                      photo: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+                    },
+                    { mouseId: 884,
+                      gender: "F",
+                      litter: 4,
+                      fatherId: 284,
+                      motherId: 285,
+                      dobMonth: 3,
+                      dobDay: 29,
+                      dobYear: 2012,
+                      dodMonth: -1, 
+                      dodDay: -1,
+                      dodYear: -1,
+                      tod: "NA",
+                      notes: "",
+                      gene1: "+/-",
+                      gene2: "NA",
+                      gene3: "NA",
+                      photo: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+                    },
+                    { mouseId: 884,
+                      gender: "F",
+                      litter: 4,
+                      fatherId: 284,
+                      motherId: 285,
+                      dobMonth: 3,
+                      dobDay: 29,
+                      dobYear: 2012,
+                      dodMonth: -1, 
+                      dodDay: -1,
+                      dodYear: -1,
+                      tod: "NA",
+                      notes: "",
+                      gene1: "+/-",
+                      gene2: "NA",
+                      gene3: "NA",
+                      photo: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+                    },
+];
 
 
   // Use the useEffect hook to get the animals using the id
   console.log('ID of the Colony', id);
 
-  const onChangeHandler = (event) => {
-    setFile(event.target.files[0]);
-    console.log(event.target.files[0].name);
-    setFileName(event.target.files[0].name);
-  };
-
-  const onClickHandler = async () => {
-    const reader = new FileReader();
-
-    reader.readAsText(file);
-
-    reader.onload = async () => {
-      const load = reader.result;
-      const data = { payload: load, name: fileName };
-      await addColony(data);
-    };
-
-    reader.onerror = () => {
-      console.log(reader.onerror);
-    };
-  };
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, animals.length - page * rowsPerPage);
 
@@ -270,9 +247,6 @@ const Animals = () => {
   return (
     <Container component="main" style={{ padding: 8 }}>
       <CssBaseline />
-      <input type="file" name="file" onChange={onChangeHandler} />
-      <Button onClick={onClickHandler} variant="outlined">Upload</Button>
-
       <TableContainer className={classes.table} component={Paper}>
         <Table className={classes.table} aria-label="custom pagination table">
           <TableBody>
