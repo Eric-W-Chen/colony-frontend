@@ -2,7 +2,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import React, { createContext, useReducer, useContext } from 'react';
 
-const initialState = { loggedIn: false, name: {}, colonies: [] };
+const initialState = { loggedIn: false, name: {} };
 const store = createContext(initialState);
 const { Provider } = store;
 
@@ -33,7 +33,7 @@ const ProfileProvider = ({ children }) => {
 
       case COLONY: {
         // Store colonies in the state
-        return { ...prevState, colonies: payload };
+        return { ...prevState, ...payload };
       }
 
       case ANIMALS: {

@@ -71,7 +71,7 @@ const useStyles2 = makeStyles({
 });
 
 const Colonies = () => {
-  const { state: { ownedColonies } } = useProfileProvider();
+  const { state, state: { ownedColonies } } = useProfileProvider();
   const { addColony, getAnimals } = useProfileProvider();
   const [file, setFile] = useState('');
   const [fileName, setFileName] = useState('');
@@ -120,6 +120,7 @@ const Colonies = () => {
   const handleCellClick = (uuid, rowsPerPage, page) => {
       const request = { colonyId: uuid, rowsPerPage, page };
       getAnimals(request);
+      console.log(state);
       setRedirectToAnimals(true);
   }
 
