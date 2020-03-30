@@ -62,91 +62,85 @@ const Register = () => {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <Button
-        variant="contained"
-        onClick={() => setRedirectToLogin(true)}
-      >
+    <div>
+      <div style={{ textAlign: 'left' }}>
+        <Button
+          variant="outlined"
+          color="default"
+          onClick={() => setRedirectToLogin(true)}
+        >
           Back to Login
-      </Button>
-      <div className={classes.paper}>
-        <Typography component="h1" variant="h5">
-          Register
+    </Button>
+      </div>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Typography component="h1" variant="h5">
+            Register
         </Typography>
 
-        <form className={classes.form} noValidate>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                name="firstName"
-                variant="outlined"
-                required
-                fullWidth
-                label="First Name"
-                autoFocus
-                onChange={updateInput}
-              />
+          <form className={classes.form} noValidate>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  name="firstName"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  label="First Name"
+                  autoFocus
+                  onChange={updateInput}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  name="lastName"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  label="Last Name"
+                  onChange={updateInput}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  type="email"
+                  name="email"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  label="Email"
+                  onChange={updateInput}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  type="password"
+                  name="password"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  label="Password"
+                  onChange={updateInput}
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                name="lastName"
-                variant="outlined"
-                required
-                fullWidth
-                label="Last Name"
-                onChange={updateInput}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                type="email"
-                name="email"
-                variant="outlined"
-                required
-                fullWidth
-                label="Email"
-                onChange={updateInput}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                type="username"
-                name="username"
-                variant="outlined"
-                required
-                fullWidth
-                label="User Name"
-                onChange={updateInput}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                type="password"
-                name="password"
-                variant="outlined"
-                required
-                fullWidth
-                label="Password"
-                onChange={updateInput}
-              />
-            </Grid>
-          </Grid>
 
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onChange={updateInput}
-            onClick={attemptRegister}
-          >
-            Register
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onChange={updateInput}
+              onClick={attemptRegister}
+            >
+              Register
           </Button>
-        </form>
-      </div>
-    </Container >
+          </form>
+        </div>
+      </Container >
+    </div>
   );
 };
 
