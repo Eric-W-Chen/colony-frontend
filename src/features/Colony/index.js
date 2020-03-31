@@ -13,7 +13,7 @@ const Colony = () => {
   
   return (
     <div className="animals">
-      <Button onClick={() => setRedirectToColonies(true)}>Back to colonies</Button>
+      <Button variant="outlined" onClick={() => setRedirectToColonies(true)}>Back to colonies</Button>
       <Animals />
     </div>
   );
