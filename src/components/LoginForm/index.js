@@ -70,7 +70,7 @@ const Login = () => {
             fullWidth
             label="Email"
             name="email"
-            type="email;"
+            type="email"
             autoFocus
             onChange={updateInput}
           />
