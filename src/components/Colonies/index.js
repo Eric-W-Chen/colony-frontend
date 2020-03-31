@@ -148,7 +148,6 @@ const Colonies = () => {
   const handleCellClick = async (uuid, rowsPerPage, page) => {
     const request = { colonyId: uuid, rowsPerPage, page };
     await getAnimals(request);
-    console.log(state);
     setRedirectToAnimals(true);
   };
 
