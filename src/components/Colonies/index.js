@@ -12,7 +12,13 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import Share from '@material-ui/icons/Share';
+import Add from '@material-ui/icons/Add';
 
 const paginationStyle = makeStyles(theme => ({
   root: {
@@ -89,7 +95,15 @@ const Colonies = () => {
   const [page, setPage] = useState(0);
   const rowsPerPage = 10;
   const [redirectToAnimals, setRedirectToAnimals] = useState(false);
+  const [addColonyOpen, setaddColonyOpen] = React.useState(false);
 
+  const handleClickOpen = () => {
+    setaddColonyOpen(true);
+  };
+
+  const handleClose = () => {
+    setaddColonyOpen(false);
+  };
 
   /* Uploading File. */
   const chooseFile = (event) => {
@@ -130,9 +144,9 @@ const Colonies = () => {
   };
 
   const handleCellClick = (uuid, rowsPerPage, page) => {
-    // const request = { colonyId: uuid, rowsPerPage, page };
-    // getAnimals(request);
-    // console.log(state);
+    const request = { colonyId: uuid, rowsPerPage, page };
+    getAnimals(request);
+    console.log(state);
     setRedirectToAnimals(true);
   }
 
@@ -144,12 +158,27 @@ const Colonies = () => {
   return (
     <Container component="main">
       <CssBaseline />
-      <div className="uploadFile">
-        <input type="file" name="file" onChange={chooseFile} />
-        <div>
-          <TextField variant="outlined" margin="dense" size="small" name="colonyName" label="Colony Name" onChange={updateInput} />
-        </div>
-        <Button onClick={uploadFile} variant="outlined" color="default" startIcon={<CloudUploadIcon />}>Upload</Button>
+      <div className="uploadFile" style={{ textAlign: 'right' }}>
+        <Button variant="outlined" color="primary" startIcon={<Add />} onClick={handleClickOpen}>
+          Add Colony
+      </Button>
+        <Dialog open={addColonyOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
+          <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              To subscribe to this website, please enter your email address here. We will send updates
+              occasionally.
+          </DialogContentText>
+            <input type="file" name="file" onChange={chooseFile} />
+            <div>
+              <TextField variant="outlined" margin="dense" size="small" name="colonyName" label="Colony Name" onChange={updateInput} />
+            </div>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={uploadFile} variant="outlined" color="default" startIcon={<CloudUploadIcon />}>Upload</Button>
+          </DialogActions>
+        </Dialog>
+
       </div>
       <TableContainer className={classes.table} component={Paper}>
         <Table className={classes.table} aria-label="custom pagination table">
