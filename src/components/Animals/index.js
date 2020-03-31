@@ -128,7 +128,7 @@ const Animals = () => {
   const [openModal, setOpenModal] = React.useState(false);
   const [currentAnimal, setCurrentAnimal] = useState({});
   const { state, getAnimals } = useProfileProvider();
-  const { animals, colonyId } = state;
+  const { animals, colonyId, colonySize } = state;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, animals.length - page * rowsPerPage);
   console.log(state);
@@ -136,7 +136,7 @@ const Animals = () => {
   // const getNextAnimals = async()
 
   const handleChangePage = async (event, newPage) => {
-    const request = { colonyId: colonyId, rowsPerPage, page };
+    const request = { colonyId, colonySize, rowsPerPage, newPage };
     await getAnimals(request);
     console.log(animals);
     setPage(newPage);
