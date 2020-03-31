@@ -198,7 +198,6 @@ const Animals = () => {
               <TablePagination
                 rowsPerPageOptions={[]}
                 colSpan={3}
-                count={100}
                 rowsPerPage={10}
                 page={page}
                 count={colonySize}
