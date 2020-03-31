@@ -7,7 +7,7 @@ import Colonies from 'components/Colonies';
 const Dashboard = () => {
 
   return (
-    <div className="dashboard" style={{ textAlign: 'center' }}>
+    <div className="dashboard">
       <div style={{textAlign: 'left'}}>
         <Logout />
       </div>

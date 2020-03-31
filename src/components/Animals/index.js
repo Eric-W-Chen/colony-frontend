@@ -136,7 +136,6 @@ const useStyles2 = makeStyles(theme => ({
 
 const Animals = () => {
   // const { animals, addColony } = useProfileProvider();
-
   const { id } = useParams();
   const classes = useStyles2();
   const [page, setPage] = React.useState(0);
@@ -247,6 +246,7 @@ const Animals = () => {
   return (
     <Container component="main" style={{ padding: 8 }}>
       <CssBaseline />
+      <h1>Colony X</h1>
       <TableContainer className={classes.table} component={Paper}>
         <Table className={classes.table} aria-label="custom pagination table">
           <TableBody>

@@ -158,10 +158,11 @@ const Colonies = () => {
   return (
     <Container component="main">
       <CssBaseline />
+      <h1>Your Colonies</h1>
       <div className="uploadFile" style={{ textAlign: 'right' }}>
         <Button variant="outlined" color="primary" startIcon={<Add />} onClick={handleClickOpen}>
           Add Colony
-      </Button>
+        </Button>
         <Dialog open={addColonyOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
           <DialogTitle id="form-dialog-title">Add Colony</DialogTitle>
           <DialogContent>
@@ -177,8 +178,8 @@ const Colonies = () => {
             <Button onClick={uploadFile} variant="outlined" color="default" startIcon={<CloudUploadIcon />}>Upload</Button>
           </DialogActions>
         </Dialog>
-
       </div>
+
       <TableContainer className={classes.table} component={Paper}>
         <Table className={classes.table} aria-label="custom pagination table">
           <TableBody>
@@ -227,7 +228,7 @@ const Colonies = () => {
           </TableFooter>
         </Table>
       </TableContainer>
-
+      
     </Container >
   );
 };
