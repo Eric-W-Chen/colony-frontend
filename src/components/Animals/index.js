@@ -218,25 +218,21 @@ const Animals = () => {
                     variant="outlined"
                     color="primary"
                     onClick={() => {
-                      window.location = '/animal/animalId';
-                    }}
-                  >Details
-                    // window.location = '/animal/animalId';
                       setCurrentAnimal(animal)
                       setRedirectTodetails(true)
-                  }}
-                >Details
-
+                    }}
+                  >Details
                 </Button>
                 </TableCell>
               </TableRow>
             ))}
-
+  {/* 
             {emptyRows > 0 && (
               <TableRow style={{ height: 53 * emptyRows }}>
                 <TableCell colSpan={6} />
               </TableRow>
             )}
+  */}
           </TableBody>
 
           <TableFooter>
@@ -245,7 +241,6 @@ const Animals = () => {
                 rowsPerPageOptions={[]}
                 colSpan={3}
                 count={colonySize}
-                count={100}
                 rowsPerPage={10}
                 page={page}
                 SelectProps={{
