@@ -142,7 +142,7 @@ const Colonies = () => {
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, ownedColonies.length - page * rowsPerPage);
 
   const handleChangePage = (event, newPage) => {
-\    setPage(newPage);
+    setPage(newPage);
   };
 
   const handleCellClick = async (uuid, rowsPerPage, page) => {
