@@ -61,7 +61,7 @@ const SingleAnimal = (props) => {
   const [redirectToAnimals, setRedirectToAnimals] = useState(false);
   const [notes, setNotes] = useState('');
 
-  console.log("PROPS: " , props.location.state.animal);
+  console.log('PROPS: ', props.location.state.animal);
   const onSaveNotes = (event) => {
     alert(`click works: ${notes}`);
     const myNotes = { animalId: id, notes }; // store the notes against an animal for a specific user.
@@ -74,8 +74,8 @@ const SingleAnimal = (props) => {
   };
 
 
-  if (redirectToAnimals){
-    return <Redirect to={`/dashboard/colony`} />;
+  if (redirectToAnimals) {
+    return <Redirect to="/dashboard/colony" />;
   }
 
 
@@ -114,7 +114,7 @@ const SingleAnimal = (props) => {
                   </Typography>
               : null
               }
-              
+
 
               <Typography variant="subtitle1" color="textSecondary">
                 <strong>Litter:</strong> {currentAnimal.litter}
@@ -145,11 +145,14 @@ const SingleAnimal = (props) => {
             </CardContent>
 
             <div className={classes.controls}>
-              <Button onClick={() => {
+              <Button
+                onClick={() => {
                 setRedirectToAnimals(true);
-              }} 
-              variant="outlined" 
-              color="primary">Back</Button>
+              }}
+                variant="outlined"
+                color="primary"
+              >Back
+              </Button>
             </div>
           </div>
 
