@@ -38,7 +38,9 @@ const ProfileProvider = ({ children }) => {
 
       case ANIMALS: {
         // Store colony animals in the state
-        return { ...prevState, colonyId: payload.colonyId, colonySize: payload.colonySize, animals: payload.animals };
+        return {
+          ...prevState, colonyId: payload.colonyId, colonySize: payload.colonySize, animals: payload.animals,
+        };
       }
 
       case LOGOUT: {

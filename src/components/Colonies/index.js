@@ -142,12 +142,14 @@ const Colonies = () => {
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, ownedColonies.length - page * rowsPerPage);
 
   const handleChangePage = (event, newPage) => {
-    console.log(newPage)
+    console.log(newPage);
     setPage(newPage);
   };
 
   const handleCellClick = async (colonyId, colonySize, rowsPerPage, page) => {
-    const request = { colonyId, colonySize, rowsPerPage, page };
+    const request = {
+      colonyId, colonySize, rowsPerPage, page,
+    };
     await getAnimals(request);
     setRedirectToAnimals(true);
   };
