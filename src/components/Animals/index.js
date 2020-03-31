@@ -132,6 +132,7 @@ const Animals = () => {
   const { animals, colonyId, colonySize } = state;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, animals.length - page * rowsPerPage);
+
   const handleChangePage = async (event, newPage) => {
     const request = { colonyId, colonySize, rowsPerPage, page: newPage };
     await getAnimals(request);
@@ -197,7 +198,8 @@ const Animals = () => {
               <TablePagination
                 rowsPerPageOptions={[]}
                 colSpan={3}
-                 rowsPerPage={10}
+                count={100}
+                rowsPerPage={10}
                 page={page}
                 count={colonySize}
                 SelectProps={{
