@@ -211,7 +211,7 @@ const Colonies = () => {
 
             {emptyRows > 0 && (
               <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={6} />
+                <TableCell colSpan={6}><p style= {{ color: 'rgba(224, 224, 224, 1)' ,fontWeight: 'bold', fontSize: 18, textAlign: 'center'}}>No Colonies</p></TableCell>
               </TableRow>
             )}
           </TableBody>

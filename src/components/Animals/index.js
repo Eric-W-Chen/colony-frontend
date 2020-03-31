@@ -196,7 +196,7 @@ const Animals = () => {
                 <TableCell align="right" style={{ borderRight: '1px solid rgba(224, 224, 224, 1)' }}>
                 <span>{animal.dobMonth}/{animal.dobDay}/{animal.dobYear}</span>
                 </TableCell>
-                <TableCell align="right" style={{ borderRight: '1px solid rgba(224, 224, 224, 1)' }}>
+                <TableCell align="center" style={{ borderRight: '1px solid rgba(224, 224, 224, 1)' }}>
                   <Button
                     variant="outlined"
                     color="primary"
