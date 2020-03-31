@@ -70,14 +70,14 @@ const Register = () => {
           onClick={() => setRedirectToLogin(true)}
         >
           Back to Login
-    </Button>
+        </Button>
       </div>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
             Register
-        </Typography>
+          </Typography>
 
           <form className={classes.form} noValidate>
             <Grid container spacing={2}>
@@ -136,7 +136,7 @@ const Register = () => {
               onClick={attemptRegister}
             >
               Register
-          </Button>
+            </Button>
           </form>
         </div>
       </Container >

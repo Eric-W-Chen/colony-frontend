@@ -30,7 +30,9 @@ const paginationStyle = makeStyles(theme => ({
 function TablePaginationActions(props) {
   const classes = paginationStyle();
   const theme = useTheme();
-  const { count, page, rowsPerPage, onChangePage } = props;
+  const {
+    count, page, rowsPerPage, onChangePage,
+  } = props;
 
   const handleFirstPageButtonClick = (event) => {
     onChangePage(event, 0);
@@ -128,7 +130,7 @@ const Colonies = () => {
 
   /**
  * Updates input for file name.
- * 
+ *
  * @param name
  * @param value
  */
@@ -148,7 +150,7 @@ const Colonies = () => {
     await getAnimals(request);
     console.log(state);
     setRedirectToAnimals(true);
-  }
+  };
 
 
   if (redirectToAnimals) {
@@ -168,7 +170,7 @@ const Colonies = () => {
           <DialogContent>
             <DialogContentText>
               Upload an animal colony along with its name.
-          </DialogContentText>
+            </DialogContentText>
             <input type="file" name="file" onChange={chooseFile} />
             <div>
               <TextField variant="outlined" margin="dense" size="small" name="colonyName" label="Colony Name" onChange={updateInput} />
@@ -228,7 +230,7 @@ const Colonies = () => {
           </TableFooter>
         </Table>
       </TableContainer>
-      
+
     </Container >
   );
 };

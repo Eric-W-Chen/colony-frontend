@@ -123,19 +123,18 @@ const useStyles2 = makeStyles(theme => ({
 
 
 const Animals = () => {
-  
   const classes = useStyles2();
   const [page, setPage] = React.useState(0);
   const rowsPerPage = 10;
   const [openModal, setOpenModal] = React.useState(false);
   const [currentAnimal, setCurrentAnimal] = useState({});
   const { state, getAnimals } = useProfileProvider();
-  var animals = state.animals;
+  const { animals } = state;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, animals.length - page * rowsPerPage);
 
   const handleChangePage = (event, newPage) => {
-    //animals = getAnimals(rowsPerPage, newPage)
+    // animals = getAnimals(rowsPerPage, newPage)
     setPage(newPage);
   };
 
@@ -195,22 +194,22 @@ const Animals = () => {
           )}
           </TableBody>
 
-        <TableFooter>
-          <TableRow>
-            <TablePagination
-              rowsPerPageOptions={[]}
-              colSpan={3}
-              count={animals.length}
-              rowsPerPage={10}
-              page={page}
-              SelectProps={{
+          <TableFooter>
+            <TableRow>
+              <TablePagination
+                rowsPerPageOptions={[]}
+                colSpan={3}
+                count={animals.length}
+                rowsPerPage={10}
+                page={page}
+                SelectProps={{
                 inputProps: { 'aria-label': 'rows per page' },
                 native: true,
               }}
-              onChangePage={handleChangePage}
-              ActionsComponent={TablePaginationActions}
-            />
-          </TableRow>
+                onChangePage={handleChangePage}
+                ActionsComponent={TablePaginationActions}
+              />
+            </TableRow>
           </TableFooter>
         </Table>
       </TableContainer>

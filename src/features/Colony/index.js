@@ -10,7 +10,7 @@ const Colony = () => {
   if (redirectToColonies) {
     return <Redirect to="/dashboard" />;
   }
-  
+
   return (
     <div className="animals">
       <Button variant="outlined" onClick={() => setRedirectToColonies(true)}>Back to colonies</Button>

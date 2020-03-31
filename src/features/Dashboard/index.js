@@ -4,16 +4,13 @@ import Colonies from 'components/Colonies';
 // import ItemForm from 'components/ItemForm';
 // import Cart from 'components/Cart';
 
-const Dashboard = () => {
-
-  return (
-    <div className="dashboard">
-      <div style={{textAlign: 'left'}}>
-        <Logout />
-      </div>
-      <Colonies />
+const Dashboard = () => (
+  <div className="dashboard">
+    <div style={{ textAlign: 'left' }}>
+      <Logout />
     </div>
-  );
-};
+    <Colonies />
+  </div>
+);
 
 export default Dashboard;
