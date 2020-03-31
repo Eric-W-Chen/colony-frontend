@@ -163,11 +163,10 @@ const Colonies = () => {
           Add Colony
       </Button>
         <Dialog open={addColonyOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
-          <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+          <DialogTitle id="form-dialog-title">Add Colony</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              To subscribe to this website, please enter your email address here. We will send updates
-              occasionally.
+              Upload an animal colony along with its name.
           </DialogContentText>
             <input type="file" name="file" onChange={chooseFile} />
             <div>
