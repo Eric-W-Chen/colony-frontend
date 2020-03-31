@@ -88,15 +88,11 @@ const SingleAnimal = (props) => {
         <Card className={classes.root}>
           <CardMedia
             className={classes.cover}
-            image="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-            title="Live from space album cover"
+            image="https://d17fnq9dkz9hgj.cloudfront.net/uploads/2012/11/106564123-rats-mice-care-253x169.jpg"
+            title="Rat"
           />
           <div className={classes.details}>
             <CardContent className={classes.content}>
-
-              <Typography variant="subtitle1" color="textSecondary">
-                <strong>Name:</strong> {currentAnimal.name}
-              </Typography>
               <Typography variant="subtitle1" color="textSecondary">
                 <strong>ID:</strong> {currentAnimal.mouseId}
               </Typography>
