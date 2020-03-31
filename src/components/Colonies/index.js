@@ -89,7 +89,7 @@ const tableStyle = makeStyles({
 });
 
 const Colonies = () => {
-  const { state, state: { ownedColonies } } = useProfileProvider();
+  const { state: { ownedColonies } } = useProfileProvider();
   const { addColony, getAnimals } = useProfileProvider();
   const [file, setFile] = useState('');
   const [fileName, setFileName] = useState('');
@@ -142,7 +142,7 @@ const Colonies = () => {
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, ownedColonies.length - page * rowsPerPage);
 
   const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+\    setPage(newPage);
   };
 
   const handleCellClick = async (uuid, rowsPerPage, page) => {
