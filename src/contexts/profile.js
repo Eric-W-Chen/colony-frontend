@@ -38,7 +38,6 @@ const ProfileProvider = ({ children }) => {
 
       case ANIMALS: {
         // Store colony animals in the state
-        console.log(payload);
         return { ...prevState, colonyId: payload.colonyId, colonySize: payload.colonySize, animals: payload.animals };
       }
 

@@ -31,6 +31,7 @@ function TablePaginationActions(props) {
   const {
      page, count, rowsPerPage, onChangePage,
   } = props;
+  console.log('cpount from table', count);
 
   const handleFirstPageButtonClick = (event) => {
     onChangePage(event, 0);
@@ -132,7 +133,6 @@ const Animals = () => {
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, animals.length - page * rowsPerPage);
   const handleChangePage = async (event, newPage) => {
-    console.log('changepage call', colonyId, colonySize, rowsPerPage, newPage);
     const request = { colonyId, colonySize, rowsPerPage, page: newPage };
     await getAnimals(request);
     setPage(newPage);
@@ -155,9 +155,7 @@ const Animals = () => {
       <TableContainer className={classes.table} component={Paper}>
         <Table className={classes.table} aria-label="custom pagination table">
           <TableBody>
-            {(rowsPerPage > 0
-            ? animals.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : animals
+            {(animals
           ).map(animal => (
             <TableRow key={animal.mouseId}>
               <TableCell
