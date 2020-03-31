@@ -6,7 +6,7 @@ const initialState = { loggedIn: false, name: {} };
 const store = createContext(initialState);
 const { Provider } = store;
 
-const BASE_URL = 'http://localhost:5000/api';
+const BASE_URL = 'https://animal-colony-76d9b.firebaseapp.com/api';
 
 const LOGIN = 'LOGIN';
 const LOGOUT = 'LOGOUT';
