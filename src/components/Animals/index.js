@@ -131,7 +131,9 @@ const Animals = () => {
   const { animals, colonyId } = state;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, animals.length - page * rowsPerPage);
-  console.log(colonyId);
+  console.log(state);
+
+  // const getNextAnimals = async()
 
   const handleChangePage = async (event, newPage) => {
     const request = { colonyId: colonyId, rowsPerPage, page };
@@ -208,7 +210,7 @@ const Animals = () => {
                 inputProps: { 'aria-label': 'rows per page' },
                 native: true,
               }}
-                onChangePage={async () => await handleChangePage}
+                onChangePage={handleChangePage}
                 ActionsComponent={TablePaginationActions}
               />
             </TableRow>

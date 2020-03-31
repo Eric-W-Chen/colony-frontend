@@ -99,11 +99,11 @@ const Colonies = () => {
   const [redirectToAnimals, setRedirectToAnimals] = useState(false);
   const [addColonyOpen, setaddColonyOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
+  const handleClickDialogOpen = () => {
     setaddColonyOpen(true);
   };
 
-  const handleClose = () => {
+  const handleDialogClose = () => {
     setaddColonyOpen(false);
   };
 
@@ -126,6 +126,8 @@ const Colonies = () => {
     reader.onerror = () => {
       console.log(reader.onerror);
     };
+
+    handleDialogClose();
   };
 
   /**
@@ -161,10 +163,10 @@ const Colonies = () => {
       <CssBaseline />
       <h1>Your Colonies</h1>
       <div className="uploadFile" style={{ textAlign: 'right' }}>
-        <Button variant="outlined" color="primary" startIcon={<Add />} onClick={handleClickOpen}>
+        <Button variant="outlined" color="primary" startIcon={<Add />} onClick={handleClickDialogOpen}>
           Add Colony
         </Button>
-        <Dialog open={addColonyOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <Dialog open={addColonyOpen} onClose={handleDialogClose} aria-labelledby="form-dialog-title">
           <DialogTitle id="form-dialog-title">Add Colony</DialogTitle>
           <DialogContent>
             <DialogContentText>
