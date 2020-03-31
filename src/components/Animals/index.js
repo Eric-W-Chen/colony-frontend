@@ -29,7 +29,7 @@ function TablePaginationActions(props) {
   const classes = paginationStyle();
   const theme = useTheme();
   const {
-     page, count, rowsPerPage, onChangePage,
+    page, count, rowsPerPage, onChangePage,
   } = props;
   console.log('cpount from table', count);
 
@@ -155,42 +155,65 @@ const Animals = () => {
       <h1>Colony X</h1>
       <TableContainer className={classes.table} component={Paper}>
         <Table className={classes.table} aria-label="custom pagination table">
+          <TableRow>
+            <TableCell style={{ borderRight: '1px solid rgba(224, 224, 224, 1)' }}>ID</TableCell>
+            <TableCell align="right" style={{ borderRight: '1px solid rgba(224, 224, 224, 1)' }}>Gender</TableCell>
+            <TableCell align="right" style={{ borderRight: '1px solid rgba(224, 224, 224, 1)' }}>Litter</TableCell>
+            <TableCell align="right" style={{ borderRight: '1px solid rgba(224, 224, 224, 1)' }}>Father&nbsp;ID</TableCell>
+            <TableCell align="right" style={{ borderRight: '1px solid rgba(224, 224, 224, 1)' }}>Mother&nbsp;ID</TableCell>
+            <TableCell align="right" style={{ borderRight: '1px solid rgba(224, 224, 224, 1)' }}>Date&nbsp; of&nbsp; Birth</TableCell>
+            <TableCell align="right" style={{ borderRight: '1px solid rgba(224, 224, 224, 1)' }}></TableCell>
+          </TableRow>
           <TableBody>
             {(animals
-          ).map(animal => (
-            <TableRow key={animal.mouseId}>
-              <TableCell
-                style={{ cursor: 'pointer' }}
-                component="th"
-                scope="row"
-                onClick={() => {
-                handleOpenModal(animal);
-              }}
-              >
-                <div style={{ fontWeight: 'bold', fontSize: 18, flexDirection: 'row' }}>
-                  <Avatar alt={animal.mouseId} />
-                  <span>{animal.mouseId}</span>
-                </div>
-              </TableCell>
-              <TableCell align="right">
-                <Button
-                  variant="outlined"
-                  color="primary"
+            ).map(animal => (
+              <TableRow key={animal.mouseId}>
+                <TableCell
+                  style={{ cursor: 'pointer', borderRight: '1px solid rgba(224, 224, 224, 1)' }}
+                  component="th"
+                  scope="row"
                   onClick={() => {
-                  window.location = '/animal/animalId';
-                }}
-                >Details
+                    handleOpenModal(animal);
+                  }}
+                >
+                  <div style={{ fontWeight: 'bold', fontSize: 18, flexDirection: 'row' }}>
+                    <Avatar alt={animal.mouseId} />
+                    <span>{animal.mouseId}</span>
+                  </div>
+                </TableCell>
+                <TableCell align="right" style={{ borderRight: '1px solid rgba(224, 224, 224, 1)' }}>
+                  {animal.gender}
+                </TableCell>
+                <TableCell align="right" style={{ borderRight: '1px solid rgba(224, 224, 224, 1)' }}>
+                  {animal.litter}
+                </TableCell>
+                <TableCell align="right" style={{ borderRight: '1px solid rgba(224, 224, 224, 1)' }}>
+                  {animal.fatherId}
+                </TableCell>
+                <TableCell align="right" style={{ borderRight: '1px solid rgba(224, 224, 224, 1)' }}>
+                  {animal.motherId}
+                </TableCell>
+                <TableCell align="right" style={{ borderRight: '1px solid rgba(224, 224, 224, 1)' }}>
+                <span>{animal.dobMonth}/{animal.dobDay}/{animal.dobYear}</span>
+                </TableCell>
+                <TableCell align="right" style={{ borderRight: '1px solid rgba(224, 224, 224, 1)' }}>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={() => {
+                      window.location = '/animal/animalId';
+                    }}
+                  >Details
                 </Button>
-              </TableCell>
-            </TableRow>
-          ))}
-
+                </TableCell>
+              </TableRow>
+            ))}
 
             {emptyRows > 0 && (
-            <TableRow style={{ height: 53 * emptyRows }}>
-              <TableCell colSpan={6} />
-            </TableRow>
-          )}
+              <TableRow style={{ height: 53 * emptyRows }}>
+                <TableCell colSpan={6} />
+              </TableRow>
+            )}
           </TableBody>
 
           <TableFooter>
@@ -198,14 +221,14 @@ const Animals = () => {
               <TablePagination
                 rowsPerPageOptions={[]}
                 colSpan={3}
+                count={colonySize}
                 count={100}
                 rowsPerPage={10}
                 page={page}
-                count={colonySize}
                 SelectProps={{
-                inputProps: { 'aria-label': 'rows per page' },
-                native: true,
-              }}
+                  inputProps: { 'aria-label': 'rows per page' },
+                  native: true,
+                }}
                 onChangePage={handleChangePage}
                 ActionsComponent={TablePaginationActions}
               />
@@ -239,7 +262,7 @@ const Animals = () => {
                   <strong>Father ID:</strong> {currentAnimal.fatherId}
                 </Typography>
                 <Typography variant="subtitle1" color="textSecondary">
-                  <strong>Mother ID:</strong> {currentAnimal.mootherId}
+                  <strong>Mother ID:</strong> {currentAnimal.motherId}
                 </Typography>
                 <Typography variant="subtitle1" color="textSecondary">
                   <strong>DOB Month:</strong> {currentAnimal.dobMonth}
