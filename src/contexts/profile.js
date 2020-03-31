@@ -80,7 +80,7 @@ const useProfileProvider = () => {
     });
 
 
-  const getAnimals = pageInfo => axios
+  const getAnimals = async pageInfo => axios
     .post(`${BASE_URL}/colony/animals`, pageInfo)
     .then(({ data }) => {
       dispatch({ type: ANIMALS, payload: data });

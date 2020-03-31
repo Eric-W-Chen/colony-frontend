@@ -143,9 +143,9 @@ const Colonies = () => {
     setPage(newPage);
   };
 
-  const handleCellClick = (uuid, rowsPerPage, page) => {
+  const handleCellClick = async (uuid, rowsPerPage, page) => {
     const request = { colonyId: uuid, rowsPerPage, page };
-    getAnimals(request);
+    await getAnimals(request);
     console.log(state);
     setRedirectToAnimals(true);
   }
@@ -191,7 +191,7 @@ const Colonies = () => {
                   style={{ cursor: 'pointer' }}
                   component="th"
                   scope="row"
-                  onClick={() => handleCellClick(ownedColony.colonyId, rowsPerPage, page)}
+                  onClick={async () => await handleCellClick(ownedColony.colonyId, rowsPerPage, page)}
                 >
                   <div style={{ fontWeight: 'bold', fontSize: 18 }}>{ownedColony.colonyName}</div>
                   <p style={{ color: '#333333' }}>Size: {ownedColony.size}</p>

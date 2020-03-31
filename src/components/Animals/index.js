@@ -143,6 +143,11 @@ const Animals = () => {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [openModal, setOpenModal] = React.useState(false);
   const [currentAnimal, setCurrentAnimal] = useState({});
+  const { state } = useProfileProvider();
+  console.log('WTF?!!?!?', state);
+  console.log('animals', state.animals);
+  const animals = state.animals;
+  /*
   const animals = [ { mouseId: 884,
                       gender: "F",
                       litter: 4,
@@ -216,7 +221,7 @@ const Animals = () => {
                       photo: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
                     },
 ];
-
+*/
 
   // Use the useEffect hook to get the animals using the id
   console.log('ID of the Colony', id);
