@@ -29,8 +29,9 @@ function TablePaginationActions(props) {
   const classes = paginationStyle();
   const theme = useTheme();
   const {
-    count, page, rowsPerPage, onChangePage,
+     page, count, rowsPerPage, onChangePage,
   } = props;
+  console.log('cpount from table', count);
 
   const handleFirstPageButtonClick = (event) => {
     onChangePage(event, 0);
@@ -131,14 +132,10 @@ const Animals = () => {
   const { animals, colonyId, colonySize } = state;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, animals.length - page * rowsPerPage);
-  console.log(state);
-
-  // const getNextAnimals = async()
 
   const handleChangePage = async (event, newPage) => {
-    const request = { colonyId, colonySize, rowsPerPage, newPage };
+    const request = { colonyId, colonySize, rowsPerPage, page: newPage };
     await getAnimals(request);
-    console.log(animals);
     setPage(newPage);
   };
 
@@ -159,9 +156,7 @@ const Animals = () => {
       <TableContainer className={classes.table} component={Paper}>
         <Table className={classes.table} aria-label="custom pagination table">
           <TableBody>
-            {(rowsPerPage > 0
-            ? animals.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : animals
+            {(animals
           ).map(animal => (
             <TableRow key={animal.mouseId}>
               <TableCell
@@ -206,6 +201,7 @@ const Animals = () => {
                 count={100}
                 rowsPerPage={10}
                 page={page}
+                count={colonySize}
                 SelectProps={{
                 inputProps: { 'aria-label': 'rows per page' },
                 native: true,
