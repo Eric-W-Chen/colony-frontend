@@ -29,7 +29,7 @@ function TablePaginationActions(props) {
   const classes = paginationStyle();
   const theme = useTheme();
   const {
-    count, page, rowsPerPage, onChangePage,
+     page, count, rowsPerPage, onChangePage,
   } = props;
 
   const handleFirstPageButtonClick = (event) => {
@@ -128,13 +128,12 @@ const Animals = () => {
   const [openModal, setOpenModal] = React.useState(false);
   const [currentAnimal, setCurrentAnimal] = useState({});
   const { state, getAnimals } = useProfileProvider();
-  const { animals, colonyId } = state;
+  const { animals, colonyId, colonySize } = state;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, animals.length - page * rowsPerPage);
-  console.log(colonyId);
   const handleChangePage = async (event, newPage) => {
-    await getAnimals(colonyId, rowsPerPage, newPage);
-    console.log(animals);
+    console.log('changepage call', colonyId, colonySize, rowsPerPage, newPage);
+    await getAnimals(colonyId, colonySize, rowsPerPage, newPage);
     setPage(newPage);
   };
 
@@ -201,11 +200,12 @@ const Animals = () => {
                 colSpan={3}
                  rowsPerPage={10}
                 page={page}
+                count={colonySize}
                 SelectProps={{
                 inputProps: { 'aria-label': 'rows per page' },
                 native: true,
               }}
-                onChangePage={async () => await handleChangePage(page)}
+                onChangePage={handleChangePage}
                 ActionsComponent={TablePaginationActions}
               />
             </TableRow>
