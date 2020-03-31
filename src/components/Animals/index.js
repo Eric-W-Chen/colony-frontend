@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useProfileProvider } from 'contexts/profile';
-import { Button, Container, CssBaseline, Table, TableBody, TableCell, TableContainer, TableRow, Paper, Avatar } from '@material-ui/core';
+import { Button, Container, CssBaseline, CardHeader, Table, TableBody, TableCell, TableContainer, TableRow, Paper, Avatar } from '@material-ui/core';
 import Modal from '@material-ui/core/Modal';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -10,13 +10,13 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
-
-
+import { red } from '@material-ui/core/colors';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
 
 import IconButton from '@material-ui/core/IconButton';
+import { Redirect } from 'react-router-dom';
 
 const paginationStyle = makeStyles(theme => ({
   root: {
@@ -94,6 +94,7 @@ const useStyles2 = makeStyles(theme => ({
   },
   root: {
     display: 'flex',
+    flexDirection: 'column'
   },
   details: {
     display: 'flex',
@@ -101,7 +102,9 @@ const useStyles2 = makeStyles(theme => ({
     flexDirection: 'column',
   },
   content: {
-    flex: '1 0 auto',
+    display: 'flex',
+    flex: '1',
+    flexDirection: 'row',
   },
   cover: {
     width: 151,
@@ -119,6 +122,9 @@ const useStyles2 = makeStyles(theme => ({
     height: 38,
     width: 38,
   },
+  avatar: {
+    backgroundColor: red[500],
+  },
 }));
 
 
@@ -128,6 +134,7 @@ const Animals = () => {
   const rowsPerPage = 10;
   const [openModal, setOpenModal] = React.useState(false);
   const [currentAnimal, setCurrentAnimal] = useState({});
+  const [redirectToDetails, setRedirectTodetails] = useState(false);
   const { state, getAnimals } = useProfileProvider();
   const { animals, colonyId, colonySize } = state;
 
@@ -147,6 +154,16 @@ const Animals = () => {
   const handleCloseModal = () => {
     setOpenModal(false);
   };
+
+  if (redirectToDetails){
+    return <Redirect 
+     // to={`/animal/${currentAnimal.mouseId}`}
+    to={{
+      pathname: `/animal/${currentAnimal.mouseId}`,
+      state: { animal: currentAnimal }
+    }}
+    />;
+  }
 
 
   return (
@@ -177,8 +194,10 @@ const Animals = () => {
                   variant="outlined"
                   color="primary"
                   onClick={() => {
-                  window.location = '/animal/animalId';
-                }}
+                    // window.location = '/animal/animalId';
+                      setCurrentAnimal(animal)
+                      setRedirectTodetails(true)
+                  }}
                 >Details
                 </Button>
               </TableCell>
@@ -198,6 +217,7 @@ const Animals = () => {
               <TablePagination
                 rowsPerPageOptions={[]}
                 colSpan={3}
+                count={100}
                 rowsPerPage={10}
                 page={page}
                 count={colonySize}
@@ -222,61 +242,73 @@ const Animals = () => {
         <div style={{ top: '20%', left: '20%' }} className={classes.paper}>
 
           <Card className={classes.root}>
+            <div>
+                <CardHeader
+                  avatar={
+                    <Avatar alt={currentAnimal.mouseId} />
+                  }
+                  title={
+                    <Typography gutterBottom variant="h5" component="h2">
+                      ID: {currentAnimal.mouseId}
+                    </Typography>
+                  }
+                  subheader={`Notes: ${currentAnimal.notes}`}
+                />
+              </div>
+              <div className={classes.content}>
+                <CardContent className={classes.details}>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    <strong>Gender:</strong> {currentAnimal.gender}
+                  </Typography>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    <strong>Litter:</strong> {currentAnimal.litter}
+                  </Typography>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    <strong>Father ID:</strong> {currentAnimal.fatherId}
+                  </Typography>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    <strong>Mother ID:</strong> {currentAnimal.motherId}
+                  </Typography>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    <strong>DOB Month:</strong> {currentAnimal.dobMonth}
+                  </Typography>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    <strong>DOB Day:</strong> {currentAnimal.dobDay}
+                  </Typography>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    <strong>DOB Year</strong> {currentAnimal.dobYear}
+                  </Typography>
+                </CardContent>
+                <CardContent className={classes.details}>
+              <Typography variant="subtitle1" color="textSecondary">
+                <strong>DOD Month:</strong> {currentAnimal.dodMonth}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                <strong>DOD Day:</strong> {currentAnimal.dodDay}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                <strong>DOD Year</strong> {currentAnimal.dodYear}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                <strong>Gene 1:</strong> {currentAnimal.gene1}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                <strong>Gene 2:</strong> {currentAnimal.gene2}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                <strong>Gene 3:</strong> {currentAnimal.gene3}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                <strong>TOD:</strong> {currentAnimal.tod}
+              </Typography>
+            </CardContent>
+              </div>
+
             <div className={classes.details}>
-              <CardContent className={classes.content}>
-
-                <Typography variant="subtitle1" color="textSecondary">
-                  <strong>ID:</strong> {currentAnimal.mouseId}
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  <strong>Gender:</strong> {currentAnimal.gender}
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  <strong>Litter:</strong> {currentAnimal.litter}
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  <strong>Father ID:</strong> {currentAnimal.fatherId}
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  <strong>Mother ID:</strong> {currentAnimal.mootherId}
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  <strong>DOB Month:</strong> {currentAnimal.dobMonth}
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  <strong>DOB Day:</strong> {currentAnimal.dobDay}
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  <strong>DOB Year</strong> {currentAnimal.dobYear}
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  <strong>DOD Month:</strong> {currentAnimal.dodMonth}
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  <strong>DOD Day:</strong> {currentAnimal.dodDay}
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  <strong>DOD Year</strong> {currentAnimal.dodYear}
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  <strong>Gene 1:</strong> {currentAnimal.gene1}
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  <strong>Gene 2:</strong> {currentAnimal.gene2}
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  <strong>Gene 3:</strong> {currentAnimal.gene3}
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  <strong>TOD:</strong> {currentAnimal.tod}
-                </Typography>
-              </CardContent>
-
               <div className={classes.controls}>
                 <Button variant="outlined" color="primary" onClick={handleCloseModal}>Done</Button>
               </div>
             </div>
-
           </Card>
 
         </div>

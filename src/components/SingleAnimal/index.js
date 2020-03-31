@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useProfileProvider } from 'contexts/profile';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Redirect } from 'react-router-dom';
 import { Button, Container, CssBaseline, Paper, Avatar } from '@material-ui/core';
 // import Modal from '@material-ui/core/Modal';
 import Card from '@material-ui/core/Card';
@@ -53,19 +53,15 @@ const useStyles2 = makeStyles(theme => ({
 }));
 
 
-const SingleAnimal = () => {
-  // const { addColony } = useProfileProvider();
+const SingleAnimal = (props) => {
   const { id } = useParams();
   const history = useHistory();
-  // const [file, setFile] = useState('');
-  // const [fileName, setFileName] = useState('');
   const classes = useStyles2();
-  // const [page, setPage] = React.useState(0);
-  // const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  // const [openModal, setOpenModal] = React.useState(false);
-  const [currentAnimal, setCurrentAnimal] = useState({});
+  const [currentAnimal, setCurrentAnimal] = useState(props.location.state.animal);
+  const [redirectToAnimals, setRedirectToAnimals] = useState(false);
   const [notes, setNotes] = useState('');
 
+  console.log("PROPS: " , props.location.state.animal);
   const onSaveNotes = (event) => {
     alert(`click works: ${notes}`);
     const myNotes = { animalId: id, notes }; // store the notes against an animal for a specific user.
@@ -76,6 +72,11 @@ const SingleAnimal = () => {
     console.log(event.target.value);
     setNotes(event.target.value);
   };
+
+
+  if (redirectToAnimals){
+    return <Redirect to={`/dashboard/colony`} />;
+  }
 
 
   return (
@@ -97,48 +98,58 @@ const SingleAnimal = () => {
                 <strong>Name:</strong> {currentAnimal.name}
               </Typography>
               <Typography variant="subtitle1" color="textSecondary">
-                <strong>ID:</strong> {currentAnimal.id}
+                <strong>ID:</strong> {currentAnimal.mouseId}
               </Typography>
               <Typography variant="subtitle1" color="textSecondary">
                 <strong>Species:</strong> My Species
               </Typography>
               <Typography variant="subtitle1" color="textSecondary">
-                <strong>Date of birth:</strong> mm/dd/yyyy
-              </Typography>
-              <Typography variant="subtitle1" color="textSecondary">
-                <strong>Date of death:</strong> mm/dd/yyyy
+                <strong>Date of birth:</strong> {currentAnimal.dobMonth}/{currentAnimal.dobDay}/{currentAnimal.dobYear}
               </Typography>
 
+              {
+                currentAnimal.dodDay > 0 ?
+                  <Typography variant="subtitle1" color="textSecondary">
+                    <strong>Date of death:</strong> {currentAnimal.dodMonth}/{currentAnimal.dodDay}/{currentAnimal.dodYear}
+                  </Typography>
+              : null
+              }
+              
+
               <Typography variant="subtitle1" color="textSecondary">
-                <strong>Litter:</strong> 4
+                <strong>Litter:</strong> {currentAnimal.litter}
               </Typography>
             </CardContent>
 
             <CardContent className={classes.content}>
 
               <Typography variant="subtitle1" color="textSecondary">
-                <strong>Father ID:</strong> #
+                <strong>Father ID:</strong> {currentAnimal.fatherId}
               </Typography>
               <Typography variant="subtitle1" color="textSecondary">
-                <strong>Mother ID:</strong> #
+                <strong>Mother ID:</strong> {currentAnimal.motherId}
               </Typography>
               <Typography variant="subtitle1" color="textSecondary">
-                <strong>Gene 1</strong> BRCA1
+                <strong>Gene 1</strong> {currentAnimal.gene1}
               </Typography>
               <Typography variant="subtitle1" color="textSecondary">
-                <strong>Gene 2</strong> BRCA2
+                <strong>Gene 2</strong> {currentAnimal.gene2}
               </Typography>
               <Typography variant="subtitle1" color="textSecondary">
                 <strong>Gene 3</strong> Y
               </Typography>
 
               <Typography variant="subtitle1" color="textSecondary">
-                <strong>Litter:</strong> 4
+                <strong>Litter:</strong> {currentAnimal.litter}
               </Typography>
             </CardContent>
 
             <div className={classes.controls}>
-              <Button onClick={() => history.goBack()} variant="outlined" color="primary">Back</Button>
+              <Button onClick={() => {
+                setRedirectToAnimals(true);
+              }} 
+              variant="outlined" 
+              color="primary">Back</Button>
             </div>
           </div>
 
