@@ -133,7 +133,8 @@ const Animals = () => {
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, animals.length - page * rowsPerPage);
   const handleChangePage = async (event, newPage) => {
     console.log('changepage call', colonyId, colonySize, rowsPerPage, newPage);
-    await getAnimals(colonyId, colonySize, rowsPerPage, newPage);
+    const request = { colonyId, colonySize, rowsPerPage, page: newPage };
+    await getAnimals(request);
     setPage(newPage);
   };
 
