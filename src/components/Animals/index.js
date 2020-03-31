@@ -123,18 +123,19 @@ const useStyles2 = makeStyles(theme => ({
 
 
 const Animals = () => {
-  // const { animals, addColony } = useProfileProvider();
+  
   const classes = useStyles2();
   const [page, setPage] = React.useState(0);
   const rowsPerPage = 10;
   const [openModal, setOpenModal] = React.useState(false);
   const [currentAnimal, setCurrentAnimal] = useState({});
-  const { state } = useProfileProvider();
-  const animals = state.animals;
+  const { state, getAnimals } = useProfileProvider();
+  var animals = state.animals;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, animals.length - page * rowsPerPage);
 
   const handleChangePage = (event, newPage) => {
+    //animals = getAnimals(rowsPerPage, newPage)
     setPage(newPage);
   };
 
@@ -214,8 +215,6 @@ const Animals = () => {
         </Table>
       </TableContainer>
 
-
-
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
@@ -284,6 +283,7 @@ const Animals = () => {
 
         </div>
       </Modal>
+
     </Container >
   );
 };
