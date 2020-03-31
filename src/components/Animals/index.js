@@ -80,18 +80,6 @@ function TablePaginationActions(props) {
 }
 
 
-// function createData(id, name, photo) {
-//   return { id, name, photo };
-// }
-
-// const rows = [
-//   createData(1, 'Animal A', 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
-//   createData(2, 'Animal B', 'https://cdn.pixabay.com/photo/2016/12/13/05/15/puppy-1903313__340.jpg'),
-//   createData(3, 'Animal C', 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/chihuahua-dog-running-across-grass-royalty-free-image-1580743445.jpg?crop=0.655xw:0.983xh;0.107xw,0&resize=640:*'),
-//   createData(4, 'Animal D', 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-laying-on-grass-high-res-stock-photography-1574096636.jpg?crop=0.722xw:1.00xh;0.140xw,0&resize=640:*'),
-//   createData(5, 'Animal E', 'https://images.theconversation.com/files/205966/original/file-20180212-58348-7huv6f.jpeg?ixlib=rb-1.1.0&q=45&auto=format&w=926&fit=clip'),
-// ];
-
 const useStyles2 = makeStyles(theme => ({
   table: {
     width: '100%',
@@ -136,107 +124,19 @@ const useStyles2 = makeStyles(theme => ({
 
 const Animals = () => {
   // const { animals, addColony } = useProfileProvider();
-  const { id } = useParams();
   const classes = useStyles2();
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const rowsPerPage = 10;
   const [openModal, setOpenModal] = React.useState(false);
   const [currentAnimal, setCurrentAnimal] = useState({});
   const { state } = useProfileProvider();
-  console.log('WTF?!!?!?', state);
-  console.log('animals', state.animals);
   const animals = state.animals;
-  /*
-  const animals = [ { mouseId: 884,
-                      gender: "F",
-                      litter: 4,
-                      fatherId: 284,
-                      motherId: 285,
-                      dobMonth: 3,
-                      dobDay: 29,
-                      dobYear: 2012,
-                      dodMonth: -1, 
-                      dodDay: -1,
-                      dodYear: -1,
-                      tod: "NA",
-                      notes: "",
-                      gene1: "+/-",
-                      gene2: "NA",
-                      gene3: "NA",
-                      photo: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-                    },
-                    { mouseId: 884,
-                      gender: "F",
-                      litter: 4,
-                      fatherId: 284,
-                      motherId: 285,
-                      dobMonth: 3,
-                      dobDay: 29,
-                      dobYear: 2012,
-                      dodMonth: -1, 
-                      dodDay: -1,
-                      dodYear: -1,
-                      tod: "NA",
-                      notes: "",
-                      gene1: "+/-",
-                      gene2: "NA",
-                      gene3: "NA",
-                      photo: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-                    },
-                    { mouseId: 884,
-                      gender: "F",
-                      litter: 4,
-                      fatherId: 284,
-                      motherId: 285,
-                      dobMonth: 3,
-                      dobDay: 29,
-                      dobYear: 2012,
-                      dodMonth: -1, 
-                      dodDay: -1,
-                      dodYear: -1,
-                      tod: "NA",
-                      notes: "",
-                      gene1: "+/-",
-                      gene2: "NA",
-                      gene3: "NA",
-                      photo: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-                    },
-                    { mouseId: 884,
-                      gender: "F",
-                      litter: 4,
-                      fatherId: 284,
-                      motherId: 285,
-                      dobMonth: 3,
-                      dobDay: 29,
-                      dobYear: 2012,
-                      dodMonth: -1, 
-                      dodDay: -1,
-                      dodYear: -1,
-                      tod: "NA",
-                      notes: "",
-                      gene1: "+/-",
-                      gene2: "NA",
-                      gene3: "NA",
-                      photo: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-                    },
-];
-*/
-
-  // Use the useEffect hook to get the animals using the id
-  console.log('ID of the Colony', id);
-
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, animals.length - page * rowsPerPage);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
 
   const handleOpenModal = (animal) => {
     setCurrentAnimal(animal);
@@ -286,32 +186,34 @@ const Animals = () => {
             </TableRow>
           ))}
 
+
             {emptyRows > 0 && (
             <TableRow style={{ height: 53 * emptyRows }}>
               <TableCell colSpan={6} />
             </TableRow>
           )}
           </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TablePagination
-                rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                colSpan={3}
-                count={animals.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                SelectProps={{
+
+        <TableFooter>
+          <TableRow>
+            <TablePagination
+              rowsPerPageOptions={[]}
+              colSpan={3}
+              count={animals.length}
+              rowsPerPage={10}
+              page={page}
+              SelectProps={{
                 inputProps: { 'aria-label': 'rows per page' },
                 native: true,
               }}
-                onChangePage={handleChangePage}
-                onChangeRowsPerPage={handleChangeRowsPerPage}
-                ActionsComponent={TablePaginationActions}
-              />
-            </TableRow>
+              onChangePage={handleChangePage}
+              ActionsComponent={TablePaginationActions}
+            />
+          </TableRow>
           </TableFooter>
         </Table>
       </TableContainer>
+
 
 
       <Modal
@@ -323,32 +225,53 @@ const Animals = () => {
         <div style={{ top: '20%', left: '20%' }} className={classes.paper}>
 
           <Card className={classes.root}>
-            <CardMedia
-              className={classes.cover}
-              image={currentAnimal.photo}
-              title="Live from space album cover"
-            />
             <div className={classes.details}>
               <CardContent className={classes.content}>
 
                 <Typography variant="subtitle1" color="textSecondary">
-                  <strong>Name:</strong> {currentAnimal.name}
+                  <strong>ID:</strong> {currentAnimal.mouseId}
                 </Typography>
                 <Typography variant="subtitle1" color="textSecondary">
-                  <strong>ID:</strong> {currentAnimal.id}
+                  <strong>Gender:</strong> {currentAnimal.gender}
                 </Typography>
                 <Typography variant="subtitle1" color="textSecondary">
-                  <strong>Species:</strong> My Species
+                  <strong>Litter:</strong> {currentAnimal.litter}
                 </Typography>
                 <Typography variant="subtitle1" color="textSecondary">
-                  <strong>Date of birth:</strong> mm/dd/yyyy
+                  <strong>Father ID:</strong> {currentAnimal.fatherId}
                 </Typography>
                 <Typography variant="subtitle1" color="textSecondary">
-                  <strong>Date of death:</strong> mm/dd/yyyy
+                  <strong>Mother ID:</strong> {currentAnimal.mootherId}
                 </Typography>
-
                 <Typography variant="subtitle1" color="textSecondary">
-                  <strong>Litter:</strong> 4
+                  <strong>DOB Month:</strong> {currentAnimal.dobMonth}
+                </Typography>
+                <Typography variant="subtitle1" color="textSecondary">
+                  <strong>DOB Day:</strong> {currentAnimal.dobDay}
+                </Typography>
+                <Typography variant="subtitle1" color="textSecondary">
+                  <strong>DOB Year</strong> {currentAnimal.dobYear}
+                </Typography>
+                <Typography variant="subtitle1" color="textSecondary">
+                  <strong>DOD Month:</strong> {currentAnimal.dodMonth}
+                </Typography>
+                <Typography variant="subtitle1" color="textSecondary">
+                  <strong>DOD Day:</strong> {currentAnimal.dodDay}
+                </Typography>
+                <Typography variant="subtitle1" color="textSecondary">
+                  <strong>DOD Year</strong> {currentAnimal.dodYear}
+                </Typography>
+                <Typography variant="subtitle1" color="textSecondary">
+                  <strong>Gene 1:</strong> {currentAnimal.gene1}
+                </Typography>
+                <Typography variant="subtitle1" color="textSecondary">
+                  <strong>Gene 2:</strong> {currentAnimal.gene2}
+                </Typography>
+                <Typography variant="subtitle1" color="textSecondary">
+                  <strong>Gene 3:</strong> {currentAnimal.gene3}
+                </Typography>
+                <Typography variant="subtitle1" color="textSecondary">
+                  <strong>TOD:</strong> {currentAnimal.tod}
                 </Typography>
               </CardContent>
 
