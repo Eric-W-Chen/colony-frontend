@@ -269,7 +269,7 @@ const Animals = () => {
               }}
               >
                 <div style={{ fontWeight: 'bold', fontSize: 18, flexDirection: 'row' }}>
-                  <Avatar alt={animal.mouseId} src={animal.photo} className={classes.large} />
+                  <Avatar alt={animal.mouseId} />
                   <span>{animal.mouseId}</span>
                 </div>
               </TableCell>
