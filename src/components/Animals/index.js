@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useProfileProvider } from 'contexts/profile';
-import { useParams } from 'react-router-dom';
 import { Button, Container, CssBaseline, Table, TableBody, TableCell, TableContainer, TableRow, Paper, Avatar } from '@material-ui/core';
 import Modal from '@material-ui/core/Modal';
 import Card from '@material-ui/core/Card';
@@ -135,6 +134,7 @@ const Animals = () => {
   console.log(colonyId);
   const handleChangePage = async (event, newPage) => {
     await getAnimals(colonyId, rowsPerPage, newPage);
+    console.log(animals);
     setPage(newPage);
   };
 
@@ -199,8 +199,7 @@ const Animals = () => {
               <TablePagination
                 rowsPerPageOptions={[]}
                 colSpan={3}
-                count={animals.length}
-                rowsPerPage={10}
+                 rowsPerPage={10}
                 page={page}
                 SelectProps={{
                 inputProps: { 'aria-label': 'rows per page' },
