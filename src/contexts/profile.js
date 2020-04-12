@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import React, { createContext, useReducer, useContext } from 'react';
 
 const initialState = { loggedIn: false, name: {} };
-const store = createContext(initialState);
+const store  = createContext(initialState);
+
 const { Provider } = store;
 
 const BASE_URL = 'https://animal-colony-76d9b.firebaseapp.com/api';
@@ -13,6 +14,8 @@ const LOGOUT = 'LOGOUT';
 const REGISTER = 'REGISTER';
 const COLONY = 'COLONY';
 const ANIMALS = 'ANIMALS';
+const SORT = 'SORT';
+const ALPHASORT = 'ALPHASORT'
 
 axios.defaults.withCredentials = true;
 
@@ -23,6 +26,7 @@ const ProfileProvider = ({ children }) => {
     switch (type) {
       case LOGIN: {
         // Store the profile data in the state
+        console.log(payload);
         return { ...prevState, loggedIn: true, ...payload };
       }
 
@@ -32,8 +36,36 @@ const ProfileProvider = ({ children }) => {
       }
 
       case COLONY: {
-        // Store colonies in the state
-        return { ...prevState, ...payload };
+        const colonies = [payload, ...prevState.ownedColonies]
+        return { ...prevState, ownedColonies: colonies };
+      }
+
+      case SORT: {
+        const colonies = [...prevState.ownedColonies]
+        colonies.sort((a,b) => { 
+          if (a[payload] < b[payload])  {
+            return -1;  //locations swap
+          }
+          if (a[payload] > b[payload]) {
+            return 1;
+          }
+          return 0;
+        });
+        return { ...prevState, ownedColonies: colonies};
+      }
+
+      case ALPHASORT: {
+        const colonies = [...prevState.ownedColonies]
+        colonies.sort((a,b) => {
+          if(a[payload].toLowerCase() < b[payload].toLowerCase()) {
+            return -1;
+          } 
+          if(a[payload].toLowerCase() > b[payload].toLowerCase()) {
+            return 1;
+          } 
+          return 0;
+        });
+        return { ...prevState, ownedColonies: colonies};
       }
 
       case ANIMALS: {
@@ -88,6 +120,15 @@ const useProfileProvider = () => {
     });
 
 
+    const sortList = (sortBy) => {
+      dispatch({ type: SORT, payload: sortBy });
+    };
+
+    const sortAlpha = (sortBy) => {
+      dispatch({ type: ALPHASORT, payload: sortBy });
+    };
+
+
   return {
     state,
     dispatch,
@@ -96,6 +137,8 @@ const useProfileProvider = () => {
     register,
     addColony,
     getAnimals,
+    sortList,
+    sortAlpha,
   };
 };
 
